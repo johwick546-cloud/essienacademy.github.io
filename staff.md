@@ -3,7 +3,7 @@ layout: page
 title: "Staff Portal"
 ---
 
-# Staff Portal 🔒
+# Staff Portal
 
 <button onclick="unlockPortal('staffPortal','Staff123')">Enter Portal</button>
 
