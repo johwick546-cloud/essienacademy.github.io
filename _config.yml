@@ -5,3 +5,13 @@ theme: minima
 author:
   name: "Essien's Excellence Academy"
   email: "unwilling.sturgeon.xlnj@letterprotect.net"
+  # Navigation links
+header_pages:
+  - about.md
+  - academics.md
+  - admissions.md
+  - student-life.md
+  - contact.md
+  - parents.md
+  - students.md
+  - staff.md
