@@ -3,7 +3,7 @@ layout: page
 title: "Student Portal"
 ---
 
-# Student Portal 🔒
+# Student Portal
 
 <button onclick="unlockPortal('studentPortal','Student123')">Enter Portal</button>
 
