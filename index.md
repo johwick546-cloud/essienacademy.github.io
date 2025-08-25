@@ -3,4 +3,60 @@ layout: default
 title: "Home"
 ---
 
-<iframe src="landing.html" style="border:none;width:100%;height:100vh;"></iframe>
+<style>
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+  }
+  .hero {
+    background: navy;
+    color: white;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+  }
+  .hero h1 {
+    font-size: 3rem;
+    margin-bottom: 10px;
+  }
+  .hero p {
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+    color: orange; /* Motto accent */
+  }
+  .buttons {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .buttons a {
+    background: orange;
+    color: black;
+    text-decoration: none;
+    padding: 12px 25px;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: 0.3s;
+  }
+  .buttons a:hover {
+    background: black;
+    color: white;
+  }
+</style>
+
+<div class="hero">
+  <h1>Essien's Excellence Academy</h1>
+  <p>Rest not, aspire a greater height</p>
+
+  <div class="buttons">
+    <a href="academics">Academics</a>
+    <a href="admissions">Admissions</a>
+    <a href="students">Students</a>
+    <a href="parents">Parents</a>
+  </div>
+</div>
