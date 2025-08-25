@@ -6,6 +6,7 @@ author: "Freeman"
  
   # Navigation links
 header_pages:
+  - index.md
   - about.md
   - academics.md
   - admissions.md
