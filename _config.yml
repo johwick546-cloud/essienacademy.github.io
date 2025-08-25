@@ -2,6 +2,12 @@ title: "Essien's Excellence Academy"
 description: "Official Website of Essien's Excellence Academy"
 theme: minima
 
+# Add custom stylesheet
+sass:
+  style: compressed
+
+include:
+  - assets/css
 author: "Freeman"
  
   # Navigation links
