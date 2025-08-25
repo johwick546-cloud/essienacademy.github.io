@@ -3,7 +3,7 @@ layout: page
 title: "Parent Portal"
 ---
 
-# Parent Portal 🔒
+# Parent Portal
 
 <button onclick="unlockPortal('parentPortal','Parent123')">Enter Portal</button>
 
