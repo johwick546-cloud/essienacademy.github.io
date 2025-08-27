@@ -1,0 +1,121 @@
+body {
+    margin: 0;
+    font-family: 'Inter', 'Arial', sans-serif;
+    background: linear-gradient(135deg, #0b1d46, #0f0c29, #24243e); /* navy shades */
+    color: white;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* Particle Canvas */
+#tsparticles {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+/* Glass Navbar */
+.glass-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 5%;
+    background: rgba(255, 255, 255, 0.07);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.logo {
+    font-weight: 700;
+    font-size: 1.5rem;
+    color: orange;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    transition: opacity 0.3s ease;
+}
+
+.nav-links a:hover {
+    opacity: 0.7;
+    color: orange;
+}
+
+/* Hero Section */
+.hero {
+    text-align: center;
+    padding: 20vh 1rem;
+    position: relative;
+    z-index: 1;
+}
+
+/* Kinetic Typography */
+.animated-headline {
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeUpIn 1.2s ease forwards;
+    animation-delay: 0.5s;
+}
+
+.featured-word {
+    background: linear-gradient(90deg, orange, #ffb347);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.subtitle {
+    font-size: 1.3rem;
+    margin-bottom: 2.5rem;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeUpIn 1.2s ease forwards;
+    animation-delay: 0.8s;
+}
+
+/* CTA Button */
+.cta-button {
+    background: orange;
+    color: black;
+    padding: 1rem 2.5rem;
+    font-size: 1.1rem;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+}
+.cta-button:hover {
+    background: black;
+    color: orange;
+    transform: translateY(-3px);
+}
+
+/* Animation */
+@keyframes fadeUpIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 768px) {
+    .animated-headline {
+        font-size: 2.2rem;
+    }
+    .nav-links {
+        gap: 1rem;
+    }
+}
