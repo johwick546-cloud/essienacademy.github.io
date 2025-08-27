@@ -1,0 +1,17 @@
+title: Essien's Excellence Academy
+description: "Rest not, aspire a greater height"
+baseurl: "" # leave this empty unless your site is in a subfolder
+url: "https://your-username.github.io" # change to your GitHub Pages URL
+
+theme: minima  # or remove this if you're using only custom HTML/CSS
+
+# Navigation links (optional)
+nav_links:
+  - title: "Academics"
+    url: /academics.html
+  - title: "Admissions"
+    url: /admissions.html
+  - title: "Students"
+    url: /students.html
+  - title: "Parents"
+    url: /parents.html
