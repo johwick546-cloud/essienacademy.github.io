@@ -1,0 +1,69 @@
+/* Background */
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: url('../images/campus-bg.jpg') no-repeat center center/cover;
+}
+
+.background {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(8px);
+}
+
+/* Transparent Card */
+.card {
+  position: relative;
+  z-index: 2;
+  background: rgba(255, 255, 255, 0.15); /* translucent */
+  backdrop-filter: blur(12px);            /* frosted glass effect */
+  border-radius: 15px;
+  padding: 2rem;
+  width: 350px;
+  text-align: center;
+  color: #fff;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+  animation: fadeIn 0.8s ease-in-out;
+}
+
+/* Buttons */
+.btn {
+  margin-top: 1.5rem;
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.3);
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.btn:hover {
+  background: rgba(255,255,255,0.5);
+}
+
+/* Features List */
+.features {
+  text-align: left;
+  margin: 1rem 0;
+  padding: 0;
+  list-style: none;
+}
+
+.features li {
+  margin: 0.5rem 0;
+  font-size: 1rem;
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
