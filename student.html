@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Portal</title>
+  <link rel="stylesheet" href="assets/css/student.css">
+</head>
+<body>
+  <!-- Background -->
+  <div class="background"></div>
+
+  <!-- Transparent Card -->
+  <div class="card" id="intro">
+    <h1>Student Portal</h1>
+    <p class="subtitle">Access your courses, track progress, and stay connected.</p>
+    
+    <ul class="features">
+      <li>📚 Download Course Materials</li>
+      <li>📊 View Grades & Analytics</li>
+      <li>📅 Submit Assignments & Track Deadlines</li>
+    </ul>
+
+    <button class="btn" onclick="showStep('verification')">Get Started</button>
+  </div>
+
+  <!-- Step 2 (hidden for now, just placeholder) -->
+  <div class="card" id="verification" style="display:none;">
+    <h2>Verify Student Access</h2>
+    <!-- form will go here in next step -->
+  </div>
+
+  <script>
+    function showStep(stepId) {
+      document.getElementById("intro").style.display = "none";
+      document.getElementById(stepId).style.display = "block";
+    }
+  </script>
+</body>
+</html>
