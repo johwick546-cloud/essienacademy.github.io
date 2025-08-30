@@ -6,7 +6,6 @@
   <title>Students | Essien's Excellence Academy</title>
   <link rel="stylesheet" href="style.css" />
   <style>
-    /* Page-local tweaks (keeps your global CSS clean) */
     .hidden { display: none !important; }
 
     .steps-wrap {
@@ -19,6 +18,17 @@
     .step-card {
       border-radius: 20px;
       padding: 2rem;
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(12px);
+    }
+
+    /* Center Steps */
+    .center-step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
     }
 
     .feature-list {
@@ -42,6 +52,7 @@
       display: grid;
       gap: 1rem;
       max-width: 520px;
+      width: 100%;
     }
     .input {
       padding: 0.9rem 1rem;
@@ -70,6 +81,7 @@
       gap: 0.5rem;
       margin-bottom: 1rem;
       flex-wrap: wrap;
+      justify-content: center;
     }
     .tab-btn {
       background: rgba(255,255,255,0.08);
@@ -91,6 +103,17 @@
       opacity: 0.9;
       margin-top: 0.25rem;
       font-size: 0.95rem;
+    }
+
+    /* Fade transitions */
+    .fade {
+      opacity: 0;
+      transform: translateY(15px);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+    }
+    .fade.show {
+      opacity: 1;
+      transform: translateY(0);
     }
   </style>
 </head>
@@ -114,8 +137,8 @@
 
     <div class="steps-wrap">
 
-      <!-- STEP 1: Information & Instructions (visible) -->
-      <section id="step1" class="liquid-glass step-card">
+      <!-- STEP 1 -->
+      <section id="step1" class="liquid-glass step-card center-step fade show">
         <h2>Student Portal</h2>
         <p class="muted">To get started, please verify your student status below.</p>
 
@@ -126,8 +149,8 @@
         </ul>
       </section>
 
-      <!-- STEP 2: Hybrid Verification (visible) -->
-      <section id="step2" class="liquid-glass step-card">
+      <!-- STEP 2 -->
+      <section id="step2" class="liquid-glass step-card center-step fade show">
         <h2>Verify Your Student Status</h2>
         <p class="muted">Use your official school email and passphrase to continue.</p>
 
@@ -144,8 +167,8 @@
         </form>
       </section>
 
-      <!-- STEP 3: Signup/Login (hidden until verification success) -->
-      <section id="step3" class="liquid-glass step-card hidden">
+      <!-- STEP 3 -->
+      <section id="step3" class="liquid-glass step-card center-step fade hidden">
         <h2>Access Your Account</h2>
 
         <div class="tabs">
@@ -153,7 +176,7 @@
           <button class="tab-btn" data-tab="login">Returning Student? Log In</button>
         </div>
 
-        <!-- Sign Up Panel -->
+        <!-- Sign Up -->
         <div id="signup" class="tab-panel active">
           <form id="signupForm" class="form-grid">
             <label for="signup-email"><strong>Email</strong></label>
@@ -170,7 +193,7 @@
           </form>
         </div>
 
-        <!-- Log In Panel -->
+        <!-- Log In -->
         <div id="login" class="tab-panel">
           <form id="loginForm" class="form-grid">
             <label for="login-email"><strong>Email</strong></label>
@@ -185,20 +208,13 @@
         </div>
       </section>
 
-      <!-- STEP 4 & 5 will come later (Customization + Real Dashboard) -->
-
     </div>
   </main>
 
   <script>
-    /**
-     * CONFIG — change these for your school:
-     * NOTE: For MVP/demo only. Do NOT store real secrets in client-side code.
-     */
-    const STUDENT_EMAIL_DOMAIN = "@essienacademy.edu.ng";   // ← change if needed
-    const DEMO_PASSPHRASE      = "demo";                    // ← change to a temp value (e.g., "Eagle2018")
+    const STUDENT_EMAIL_DOMAIN = "@essienacademy.edu.ng";
+    const DEMO_PASSPHRASE = "demo";
 
-    // STEP 2 — Verification
     const verificationForm = document.getElementById('verificationForm');
     const verifyError = document.getElementById('verifyError');
     const step2 = document.getElementById('step2');
@@ -206,14 +222,10 @@
 
     verificationForm.addEventListener('submit', (e) => {
       e.preventDefault();
-
       const email = (document.getElementById('school-email').value || "").trim().toLowerCase();
-      const pass  = (document.getElementById('passphrase').value || "").trim();
+      const pass = (document.getElementById('passphrase').value || "").trim();
 
-      // Client-side email domain check
       const validDomain = email.endsWith(STUDENT_EMAIL_DOMAIN.toLowerCase());
-
-      // Demo passphrase check (client-side only for now)
       const passOk = pass === DEMO_PASSPHRASE;
 
       if (!validDomain && !passOk) {
@@ -229,15 +241,20 @@
         return;
       }
 
-      // Success → hide Step 2, show Step 3, prefill email
       verifyError.style.display = 'none';
-      step2.classList.add('hidden');
-      step3.classList.remove('hidden');
 
-      const signupEmail = document.getElementById('signup-email');
-      if (signupEmail) signupEmail.value = email;
-      const loginEmail = document.getElementById('login-email');
-      if (loginEmail) loginEmail.value = email;
+      // Fade out Step 2
+      step2.classList.remove('show');
+      setTimeout(() => {
+        step2.classList.add('hidden');
+
+        // Fade in Step 3
+        step3.classList.remove('hidden');
+        setTimeout(() => step3.classList.add('show'), 50);
+      }, 400);
+
+      document.getElementById('signup-email').value = email;
+      document.getElementById('login-email').value = email;
     });
 
     function showError(msg) {
@@ -245,7 +262,7 @@
       verifyError.style.display = 'block';
     }
 
-    // Tabs logic (Step 3)
+    // Tabs
     document.querySelectorAll('.tab-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
@@ -257,7 +274,7 @@
       });
     });
 
-    // Prevent default submit for demo (we’ll wire to real auth later)
+    // Demo signup/login
     document.getElementById('signupForm').addEventListener('submit', (e) => {
       e.preventDefault();
       const pw = document.getElementById('password').value;
@@ -266,14 +283,12 @@
         alert("Passwords do not match.");
         return;
       }
-      alert("✅ Demo: account created. Next step (Customization) will be added later.");
-      // TODO: redirect to onboarding (Step 4) when backend/auth is ready
+      alert("✅ Demo: account created.");
     });
 
     document.getElementById('loginForm').addEventListener('submit', (e) => {
       e.preventDefault();
-      alert("✅ Demo: logged in. Main dashboard (Step 5) will be added later.");
-      // TODO: redirect to dashboard when backend/auth is ready
+      alert("✅ Demo: logged in.");
     });
   </script>
 </body>
