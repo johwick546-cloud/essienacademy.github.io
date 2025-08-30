@@ -21,6 +21,7 @@
       display: grid;
       gap: 1rem;
       max-width: 520px;
+      margin: 0 auto; /* center align */
     }
     .input, select {
       padding: 0.9rem 1rem;
@@ -46,6 +47,7 @@
       gap: 0.5rem;
       margin-bottom: 1rem;
       flex-wrap: wrap;
+      justify-content: center;
     }
     .tab-btn {
       background: rgba(255,255,255,0.08);
@@ -65,7 +67,9 @@
       opacity: 0.9;
       margin-top: 0.25rem;
       font-size: 0.95rem;
+      text-align: center;
     }
+    h1, h2, p { text-align: center; }
   </style>
 </head>
 <body>
@@ -140,7 +144,7 @@
         </div>
       </section>
 
-      <!-- STEP 4: Customization -->
+      <!-- STEP 4 -->
       <section id="step4" class="liquid-glass step-card hidden">
         <h2>Customize Your Profile</h2>
         <form id="customForm" class="form-grid">
@@ -165,13 +169,6 @@
             <option>JHS 3</option>
           </select>
 
-          <label>Theme</label>
-          <select id="theme" class="input">
-            <option>Light</option>
-            <option>Dark</option>
-            <option>School Colors</option>
-          </select>
-
           <button type="submit" class="cta-button">Save & Go to Dashboard</button>
         </form>
       </section>
@@ -179,9 +176,16 @@
     </div>
   </main>
 
+  <!-- Supabase client -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script>
     const STUDENT_EMAIL_DOMAIN = "@essienacademy.edu.ng";
     const DEMO_PASSPHRASE = "demo";
+
+    // 🔑 replace these with your own Supabase project values
+    const supabaseUrl = "https://YOUR_PROJECT_URL.supabase.co";
+    const supabaseAnonKey = "YOUR_ANON_KEY";
+    const supabase = supabase.createClient(supabaseUrl, supabaseAnonKey);
 
     const verificationForm = document.getElementById('verificationForm');
     const verifyError = document.getElementById('verifyError');
@@ -217,33 +221,79 @@
     });
 
     // Sign up
-    document.getElementById('signupForm').addEventListener('submit', e => {
+    document.getElementById('signupForm').addEventListener('submit', async (e) => {
       e.preventDefault();
+      const email = document.getElementById('signup-email').value;
       const pw = document.getElementById('password').value;
       const pw2 = document.getElementById('password-confirm').value;
       if (pw !== pw2) return alert("Passwords do not match.");
+
+      const { error } = await supabase.auth.signUp({ email, password: pw });
+      if (error) {
+        alert("Error signing up: " + error.message);
+        return;
+      }
+
       step3.classList.add('hidden');
       step4.classList.remove('hidden');
     });
 
     // Login
-    document.getElementById('loginForm').addEventListener('submit', e => {
+    document.getElementById('loginForm').addEventListener('submit', async (e) => {
       e.preventDefault();
+      const email = document.getElementById('login-email').value;
+      const pw = document.getElementById('login-password').value;
+
+      const { error } = await supabase.auth.signInWithPassword({ email, password: pw });
+      if (error) {
+        alert("Login failed: " + error.message);
+        return;
+      }
+
       step3.classList.add('hidden');
       step4.classList.remove('hidden');
     });
 
-    // Customization
-    document.getElementById('customForm').addEventListener('submit', e => {
+    // Save Profile to Supabase
+    async function saveProfile({ firstName, lastName, gender, studentClass }) {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) return alert("Not logged in!");
+
+      const { error } = await supabase.from("students").insert([
+        {
+          user_id: user.id,
+          first_name: firstName,
+          last_name: lastName,
+          gender,
+          class: studentClass
+        }
+      ]);
+
+      if (error) {
+        console.error(error);
+        alert("Failed to save profile ❌");
+      } else {
+        alert("Profile saved successfully ✅");
+        window.location.href = "dashboard.html";
+      }
+    }
+
+    // Customization form
+    document.getElementById('customForm').addEventListener('submit', async (e) => {
       e.preventDefault();
-      const name = document.getElementById('fullName').value;
+      const fullName = document.getElementById('fullName').value;
       const gender = document.getElementById('gender').value;
       const studentClass = document.getElementById('studentClass').value;
-      const theme = document.getElementById('theme').value;
-      // Save to localStorage (demo)
-      localStorage.setItem("studentProfile", JSON.stringify({name, gender, studentClass, theme}));
-      // Redirect to new tab (dashboard.html)
-      window.open("dashboard.html", "_blank");
+
+      const [firstName, ...rest] = fullName.trim().split(" ");
+      const lastName = rest.join(" ");
+
+      try {
+        await saveProfile({ firstName, lastName, gender, studentClass });
+      } catch (err) {
+        console.error("Error saving profile:", err);
+        alert("Failed to save profile ❌");
+      }
     });
   </script>
 </body>
