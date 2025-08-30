@@ -7,54 +7,22 @@
   <link rel="stylesheet" href="style.css" />
   <style>
     .hidden { display: none !important; }
-
     .steps-wrap {
       display: grid;
       gap: 2rem;
       max-width: 1000px;
       margin: 0 auto;
     }
-
     .step-card {
       border-radius: 20px;
       padding: 2rem;
-      background: rgba(255, 255, 255, 0.08);
-      backdrop-filter: blur(12px);
     }
-
-    /* Center Steps */
-    .center-step {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-    }
-
-    .feature-list {
-      display: grid;
-      gap: 0.75rem;
-      margin: 1.25rem 0 0;
-    }
-    .feature-list li {
-      list-style: none;
-      display: flex;
-      gap: 0.6rem;
-      align-items: center;
-      line-height: 1.5;
-      opacity: 0.95;
-    }
-    .feature-list .icon {
-      font-size: 1.25rem;
-    }
-
     .form-grid {
       display: grid;
       gap: 1rem;
       max-width: 520px;
-      width: 100%;
     }
-    .input {
+    .input, select {
       padding: 0.9rem 1rem;
       border-radius: 12px;
       border: 1px solid rgba(255,255,255,0.15);
@@ -64,7 +32,6 @@
     }
     .input::placeholder { color: #cfcfcf; }
     .help { font-size: 0.9rem; opacity: 0.85; margin-top: -0.25rem; }
-
     .error {
       margin-top: 0.75rem;
       background: rgba(255, 69, 58, 0.15);
@@ -74,14 +41,11 @@
       border-radius: 12px;
       display: none;
     }
-
-    /* Tabs (Step 3) */
     .tabs {
       display: flex;
       gap: 0.5rem;
       margin-bottom: 1rem;
       flex-wrap: wrap;
-      justify-content: center;
     }
     .tab-btn {
       background: rgba(255,255,255,0.08);
@@ -90,7 +54,6 @@
       padding: 0.6rem 1rem;
       cursor: pointer;
       color: #fff;
-      transition: transform 0.2s ease;
     }
     .tab-btn.active {
       background: orange;
@@ -98,28 +61,15 @@
     }
     .tab-panel { display: none; }
     .tab-panel.active { display: block; }
-
     .muted {
       opacity: 0.9;
       margin-top: 0.25rem;
       font-size: 0.95rem;
     }
-
-    /* Fade transitions */
-    .fade {
-      opacity: 0;
-      transform: translateY(15px);
-      transition: opacity 0.4s ease, transform 0.4s ease;
-    }
-    .fade.show {
-      opacity: 1;
-      transform: translateY(0);
-    }
   </style>
 </head>
 <body>
 
-  <!-- Glass Navbar -->
   <nav class="glass-nav">
     <div class="logo">Essien's Excellence Academy</div>
     <ul class="nav-links">
@@ -138,74 +88,92 @@
     <div class="steps-wrap">
 
       <!-- STEP 1 -->
-      <section id="step1" class="liquid-glass step-card center-step fade show">
+      <section id="step1" class="liquid-glass step-card">
         <h2>Student Portal</h2>
-        <p class="muted">To get started, please verify your student status below.</p>
-
-        <ul class="feature-list">
-          <li><span class="icon">📚</span> <span>Download Course Materials</span></li>
-          <li><span class="icon">📊</span> <span>View Your Grades & Analytics</span></li>
-          <li><span class="icon">📅</span> <span>Submit Assignments & Track Deadlines</span></li>
+        <ul>
+          <li>📚 Download Course Materials</li>
+          <li>📊 View Grades</li>
+          <li>📅 Submit Assignments</li>
         </ul>
       </section>
 
       <!-- STEP 2 -->
-      <section id="step2" class="liquid-glass step-card center-step fade show">
+      <section id="step2" class="liquid-glass step-card">
         <h2>Verify Your Student Status</h2>
-        <p class="muted">Use your official school email and passphrase to continue.</p>
-
         <form id="verificationForm" class="form-grid" novalidate>
-          <label for="school-email"><strong>School Email Address</strong></label>
-          <input class="input" type="email" id="school-email" name="school-email" placeholder="first.last@essienacademy.edu.ng" required />
-
-          <label for="passphrase"><strong>Secret Passphrase</strong></label>
-          <input class="input" type="text" id="passphrase" name="passphrase" placeholder="Enter the shared passphrase" required />
-          <div class="help">Hint: It’s the name of our mountain and founding year.</div>
-
+          <label><strong>School Email</strong></label>
+          <input class="input" type="email" id="school-email" placeholder="first.last@essienacademy.edu.ng" required />
+          <label><strong>Secret Passphrase</strong></label>
+          <input class="input" type="text" id="passphrase" placeholder="Enter passphrase" required />
+          <div class="help">Hint: Mountain + founding year.</div>
           <button type="submit" class="cta-button">Verify & Continue</button>
           <div id="verifyError" class="error"></div>
         </form>
       </section>
 
       <!-- STEP 3 -->
-      <section id="step3" class="liquid-glass step-card center-step fade hidden">
+      <section id="step3" class="liquid-glass step-card hidden">
         <h2>Access Your Account</h2>
-
         <div class="tabs">
-          <button class="tab-btn active" data-tab="signup">New Student? Sign Up</button>
-          <button class="tab-btn" data-tab="login">Returning Student? Log In</button>
+          <button class="tab-btn active" data-tab="signup">Sign Up</button>
+          <button class="tab-btn" data-tab="login">Log In</button>
         </div>
-
-        <!-- Sign Up -->
         <div id="signup" class="tab-panel active">
           <form id="signupForm" class="form-grid">
-            <label for="signup-email"><strong>Email</strong></label>
-            <input class="input" type="email" id="signup-email" name="signup-email" required />
-
-            <label for="password"><strong>Create Password</strong></label>
-            <input class="input" type="password" id="password" name="password" required />
-
-            <label for="password-confirm"><strong>Confirm Password</strong></label>
-            <input class="input" type="password" id="password-confirm" name="password-confirm" required />
-
+            <label>Email</label>
+            <input class="input" type="email" id="signup-email" required />
+            <label>Create Password</label>
+            <input class="input" type="password" id="password" required />
+            <label>Confirm Password</label>
+            <input class="input" type="password" id="password-confirm" required />
             <button type="submit" class="cta-button">Create Account</button>
-            <div class="help">Demo-only for now. We’ll wire this to secure auth next.</div>
           </form>
         </div>
-
-        <!-- Log In -->
         <div id="login" class="tab-panel">
           <form id="loginForm" class="form-grid">
-            <label for="login-email"><strong>Email</strong></label>
-            <input class="input" type="email" id="login-email" name="login-email" required />
-
-            <label for="login-password"><strong>Password</strong></label>
-            <input class="input" type="password" id="login-password" name="login-password" required />
-
+            <label>Email</label>
+            <input class="input" type="email" id="login-email" required />
+            <label>Password</label>
+            <input class="input" type="password" id="login-password" required />
             <button type="submit" class="cta-button">Log In</button>
-            <a class="muted" href="#" onclick="alert('Password reset will be added later.'); return false;">Forgot Password?</a>
           </form>
         </div>
+      </section>
+
+      <!-- STEP 4: Customization -->
+      <section id="step4" class="liquid-glass step-card hidden">
+        <h2>Customize Your Profile</h2>
+        <form id="customForm" class="form-grid">
+          <label>Full Name</label>
+          <input class="input" type="text" id="fullName" required />
+
+          <label>Gender</label>
+          <select id="gender" class="input" required>
+            <option value="">--Select--</option>
+            <option>Male</option>
+            <option>Female</option>
+          </select>
+
+          <label>Class</label>
+          <select id="studentClass" class="input" required>
+            <option value="">--Select--</option>
+            <option>Basic 7</option>
+            <option>Basic 8</option>
+            <option>Basic 9</option>
+            <option>JHS 1</option>
+            <option>JHS 2</option>
+            <option>JHS 3</option>
+          </select>
+
+          <label>Theme</label>
+          <select id="theme" class="input">
+            <option>Light</option>
+            <option>Dark</option>
+            <option>School Colors</option>
+          </select>
+
+          <button type="submit" class="cta-button">Save & Go to Dashboard</button>
+        </form>
       </section>
 
     </div>
@@ -219,76 +187,63 @@
     const verifyError = document.getElementById('verifyError');
     const step2 = document.getElementById('step2');
     const step3 = document.getElementById('step3');
+    const step4 = document.getElementById('step4');
 
     verificationForm.addEventListener('submit', (e) => {
       e.preventDefault();
-      const email = (document.getElementById('school-email').value || "").trim().toLowerCase();
-      const pass = (document.getElementById('passphrase').value || "").trim();
-
-      const validDomain = email.endsWith(STUDENT_EMAIL_DOMAIN.toLowerCase());
+      const email = document.getElementById('school-email').value.toLowerCase();
+      const pass = document.getElementById('passphrase').value.trim();
+      const validDomain = email.endsWith(STUDENT_EMAIL_DOMAIN);
       const passOk = pass === DEMO_PASSPHRASE;
-
-      if (!validDomain && !passOk) {
-        showError("Please use your official " + STUDENT_EMAIL_DOMAIN + " email and correct passphrase.");
+      if (!validDomain || !passOk) {
+        verifyError.textContent = "Invalid email or passphrase.";
+        verifyError.style.display = "block";
         return;
       }
-      if (!validDomain) {
-        showError("Email must end with " + STUDENT_EMAIL_DOMAIN + ".");
-        return;
-      }
-      if (!passOk) {
-        showError("Incorrect passphrase. Please try again.");
-        return;
-      }
-
-      verifyError.style.display = 'none';
-
-      // Fade out Step 2
-      step2.classList.remove('show');
-      setTimeout(() => {
-        step2.classList.add('hidden');
-
-        // Fade in Step 3
-        step3.classList.remove('hidden');
-        setTimeout(() => step3.classList.add('show'), 50);
-      }, 400);
-
+      step2.classList.add('hidden');
+      step3.classList.remove('hidden');
       document.getElementById('signup-email').value = email;
       document.getElementById('login-email').value = email;
     });
-
-    function showError(msg) {
-      verifyError.textContent = msg;
-      verifyError.style.display = 'block';
-    }
 
     // Tabs
     document.querySelectorAll('.tab-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
-
-        const target = btn.dataset.tab;
         document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-        document.getElementById(target).classList.add('active');
+        document.getElementById(btn.dataset.tab).classList.add('active');
       });
     });
 
-    // Demo signup/login
-    document.getElementById('signupForm').addEventListener('submit', (e) => {
+    // Sign up
+    document.getElementById('signupForm').addEventListener('submit', e => {
       e.preventDefault();
       const pw = document.getElementById('password').value;
       const pw2 = document.getElementById('password-confirm').value;
-      if (pw !== pw2) {
-        alert("Passwords do not match.");
-        return;
-      }
-      alert("✅ Demo: account created.");
+      if (pw !== pw2) return alert("Passwords do not match.");
+      step3.classList.add('hidden');
+      step4.classList.remove('hidden');
     });
 
-    document.getElementById('loginForm').addEventListener('submit', (e) => {
+    // Login
+    document.getElementById('loginForm').addEventListener('submit', e => {
       e.preventDefault();
-      alert("✅ Demo: logged in.");
+      step3.classList.add('hidden');
+      step4.classList.remove('hidden');
+    });
+
+    // Customization
+    document.getElementById('customForm').addEventListener('submit', e => {
+      e.preventDefault();
+      const name = document.getElementById('fullName').value;
+      const gender = document.getElementById('gender').value;
+      const studentClass = document.getElementById('studentClass').value;
+      const theme = document.getElementById('theme').value;
+      // Save to localStorage (demo)
+      localStorage.setItem("studentProfile", JSON.stringify({name, gender, studentClass, theme}));
+      // Redirect to new tab (dashboard.html)
+      window.open("dashboard.html", "_blank");
     });
   </script>
 </body>
