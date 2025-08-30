@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dashboard | Essien's Excellence Academy</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body { padding: 2rem; font-family: sans-serif; }
+    .card { background: rgba(255,255,255,0.08); padding: 1.5rem; border-radius: 16px; margin-bottom: 1rem; }
+  </style>
+</head>
+<body>
+  <h1 id="welcome"></h1>
+  <div class="card">📚 Course Materials</div>
+  <div class="card">📊 Grades & Analytics</div>
+  <div class="card">📅 Assignments & Deadlines</div>
+  <div class="card">⚙️ Settings</div>
+
+  <script>
+    const profile = JSON.parse(localStorage.getItem("studentProfile") || "{}");
+    document.getElementById("welcome").textContent =
+      `Welcome, ${profile.name || "Student"} (${profile.studentClass || ""}) 👋`;
+  </script>
+</body>
+</html>
