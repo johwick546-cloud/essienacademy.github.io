@@ -1,131 +1,103 @@
-/* Reset + global */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-body {
-  font-family: "Segoe UI", sans-serif;
+/* ===== Students page only (scoped) ===== */
+#student-root {
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  /* keep your brand blue gradient */
   background: linear-gradient(135deg, #001f3f, #0074D9);
   color: #fff;
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1rem;
 }
 
-/* Container */
-.container {
+#student-root .student-container {
   width: 100%;
-  max-width: 450px;
-  display: flex;
-  flex-direction: column;
+  max-width: 480px;
+  display: grid;
   gap: 2rem;
 }
 
-/* Glassmorphism Card */
-.card {
-  background: rgba(255, 255, 255, 0.1);
+/* Glassmorphism card */
+#student-root .student-card {
+  background: rgba(255, 255, 255, 0.10);
+  border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 20px;
   padding: 2rem;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 10px 35px rgba(0,0,0,0.25);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   text-align: center;
-  animation: fadeIn 0.6s ease-in-out;
+  animation: studentFadeIn 0.4s ease;
 }
 
-/* Headings */
-.card h2 {
-  margin-bottom: 1rem;
+#student-root .student-card h2 {
   font-size: 1.6rem;
+  margin-bottom: 1rem;
   font-weight: 600;
-  color: #f0f0f0;
+  color: #f3f6ff;
 }
 
 /* Forms */
-form {
-  display: flex;
-  flex-direction: column;
+#student-root .student-form {
+  display: grid;
   gap: 1rem;
 }
 
-/* Inputs */
-input {
-  padding: 0.8rem;
+#student-root .student-input {
+  padding: 0.9rem 1rem;
+  border-radius: 12px;
   border: none;
-  border-radius: 10px;
-  font-size: 1rem;
   outline: none;
-  background: rgba(255, 255, 255, 0.2);
+  font-size: 1rem;
   color: #fff;
+  background: rgba(255,255,255,0.18);
 }
 
-input::placeholder {
-  color: rgba(255, 255, 255, 0.7);
+#student-root .student-input::placeholder {
+  color: rgba(255,255,255,0.75);
 }
 
 /* Buttons */
-button {
-  padding: 0.9rem;
+#student-root .student-btn {
+  padding: 0.95rem 1.1rem;
   border: none;
-  border-radius: 10px;
-  background: linear-gradient(135deg, #0074D9, #39CCCC);
-  color: white;
-  font-size: 1rem;
+  border-radius: 12px;
+  font-weight: 700;
   cursor: pointer;
-  transition: 0.3s ease;
+  background: linear-gradient(135deg, #0074D9, #39CCCC);
+  color: #00131f;
+  transition: transform 0.15s ease, opacity 0.15s ease;
 }
 
-button:hover {
-  opacity: 0.9;
-  transform: scale(1.02);
+#student-root .student-btn:hover {
+  opacity: 0.92;
+  transform: translateY(-1px);
 }
 
 /* Divider */
-.divider {
+#student-root .student-divider {
   margin: 1.5rem 0;
   border: none;
-  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  border-top: 1px solid rgba(255,255,255,0.25);
 }
 
-/* Error Message */
-.error {
+/* Error */
+#student-root .student-error {
+  margin-top: 0.6rem;
   color: #ff6b6b;
-  margin-top: 0.5rem;
   display: none;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
 }
 
-/* Hidden utility */
-.hidden {
-  display: none;
-}
+/* Utilities */
+#student-root .student-hidden { display: none !important; }
 
-/* Animation */
-@keyframes fadeIn {
+@keyframes studentFadeIn {
   from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
-/* Responsive Design */
-@media (max-width: 500px) {
-  .container {
-    max-width: 100%;
-  }
-
-  .card {
-    padding: 1.5rem;
-  }
-
-  .card h2 {
-    font-size: 1.4rem;
-  }
-
-  input, button {
-    font-size: 0.95rem;
-    padding: 0.75rem;
-  }
+/* Mobile tweaks */
+@media (max-width: 480px) {
+  #student-root .student-card { padding: 1.5rem; }
+  #student-root .student-card h2 { font-size: 1.4rem; }
 }
