@@ -29,7 +29,7 @@
         <input type="password" id="signup-password" placeholder="Password" required />
         <button type="submit">Create Account</button>
       </form>
-      <hr style="margin: 1.5rem 0; border: none; border-top: 1px solid rgba(255,255,255,0.2);" />
+      <hr class="divider" />
       <form id="login-form">
         <input type="email" id="login-email" placeholder="Email" required />
         <input type="password" id="login-password" placeholder="Password" required />
@@ -41,7 +41,10 @@
   <script type="module">
     import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
-    const supabase = createClient("https://lqpxjyjzvabtpfdxxpjo.supabase.co", "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxxcHhqeWp6dmFidHBmZHh4cGpvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTY1ODgxMDMsImV4cCI6MjA3MjE2NDEwM30.LZ5HWNh_smPcBg7cDKj3SPvs-0uPewLfXkjoNHNIGYE");
+    const supabase = createClient(
+      "https://lqpxjyjzvabtpfdxxpjo.supabase.co",
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxxcHhqeWp6dmFidHBmZHh4cGpvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTY1ODgxMDMsImV4cCI6MjA3MjE2NDEwM30.LZ5HWNh_smPcBg7cDKj3SPvs-0uPewLfXkjoNHNIGYE"
+    );
 
     // Step elements
     const step2 = document.getElementById("step2");
