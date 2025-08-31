@@ -6,11 +6,15 @@
   <title>Students | Essien's Excellence Academy</title>
   <link rel="stylesheet" href="style.css" />
   <style>
+    body {
+      text-align: center;
+    }
     .hidden { display: none !important; }
     .steps-wrap {
-      display: grid;
+      display: flex;
+      flex-direction: column;
       gap: 2rem;
-      max-width: 1000px;
+      max-width: 600px;
       margin: 0 auto;
     }
     .step-card {
@@ -20,8 +24,9 @@
     .form-grid {
       display: grid;
       gap: 1rem;
-      max-width: 520px;
-      margin: 0 auto; /* center align */
+      margin: 0 auto;
+      max-width: 400px;
+      text-align: left;
     }
     .input, select {
       padding: 0.9rem 1rem;
@@ -32,7 +37,6 @@
       outline: none;
     }
     .input::placeholder { color: #cfcfcf; }
-    .help { font-size: 0.9rem; opacity: 0.85; margin-top: -0.25rem; }
     .error {
       margin-top: 0.75rem;
       background: rgba(255, 69, 58, 0.15);
@@ -41,13 +45,14 @@
       padding: 0.75rem 1rem;
       border-radius: 12px;
       display: none;
+      text-align: center;
     }
     .tabs {
       display: flex;
+      justify-content: center;
       gap: 0.5rem;
       margin-bottom: 1rem;
       flex-wrap: wrap;
-      justify-content: center;
     }
     .tab-btn {
       background: rgba(255,255,255,0.08);
@@ -63,13 +68,6 @@
     }
     .tab-panel { display: none; }
     .tab-panel.active { display: block; }
-    .muted {
-      opacity: 0.9;
-      margin-top: 0.25rem;
-      font-size: 0.95rem;
-      text-align: center;
-    }
-    h1, h2, p { text-align: center; }
   </style>
 </head>
 <body>
@@ -87,19 +85,9 @@
 
   <main class="page-section">
     <h1>Student Life & Portal</h1>
-    <p class="muted">Access your learning tools, track progress, and stay connected with your school community.</p>
+    <p>Access your learning tools, track progress, and stay connected with your school community.</p>
 
     <div class="steps-wrap">
-
-      <!-- STEP 1 -->
-      <section id="step1" class="liquid-glass step-card">
-        <h2>Student Portal</h2>
-        <ul>
-          <li>📚 Download Course Materials</li>
-          <li>📊 View Grades</li>
-          <li>📅 Submit Assignments</li>
-        </ul>
-      </section>
 
       <!-- STEP 2 -->
       <section id="step2" class="liquid-glass step-card">
@@ -109,7 +97,6 @@
           <input class="input" type="email" id="school-email" placeholder="first.last@essienacademy.edu.ng" required />
           <label><strong>Secret Passphrase</strong></label>
           <input class="input" type="text" id="passphrase" placeholder="Enter passphrase" required />
-          <div class="help">Hint: Mountain + founding year.</div>
           <button type="submit" class="cta-button">Verify & Continue</button>
           <div id="verifyError" class="error"></div>
         </form>
@@ -148,8 +135,11 @@
       <section id="step4" class="liquid-glass step-card hidden">
         <h2>Customize Your Profile</h2>
         <form id="customForm" class="form-grid">
-          <label>Full Name</label>
-          <input class="input" type="text" id="fullName" required />
+          <label>First Name</label>
+          <input class="input" type="text" id="firstName" required />
+
+          <label>Last Name</label>
+          <input class="input" type="text" id="lastName" required />
 
           <label>Gender</label>
           <select id="gender" class="input" required>
@@ -169,6 +159,16 @@
             <option>JHS 3</option>
           </select>
 
+          <label>Date of Birth</label>
+          <input class="input" type="date" id="dob" required />
+
+          <label>Theme</label>
+          <select id="theme" class="input">
+            <option>Light</option>
+            <option>Dark</option>
+            <option>School Colors</option>
+          </select>
+
           <button type="submit" class="cta-button">Save & Go to Dashboard</button>
         </form>
       </section>
@@ -176,30 +176,28 @@
     </div>
   </main>
 
-  <!-- Supabase client -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <!-- Supabase -->
+  <script src="https://unpkg.com/@supabase/supabase-js"></script>
   <script>
+    const supabase = supabase.createClient(
+      "https://YOUR_PROJECT_URL.supabase.co", 
+      "YOUR_ANON_KEY"
+    );
+
     const STUDENT_EMAIL_DOMAIN = "@essienacademy.edu.ng";
     const DEMO_PASSPHRASE = "demo";
 
-    // 🔑 replace these with your own Supabase project values
-    const supabaseUrl = "https://YOUR_PROJECT_URL.supabase.co";
-    const supabaseAnonKey = "YOUR_ANON_KEY";
-    const supabase = supabase.createClient(supabaseUrl, supabaseAnonKey);
-
-    const verificationForm = document.getElementById('verificationForm');
-    const verifyError = document.getElementById('verifyError');
     const step2 = document.getElementById('step2');
     const step3 = document.getElementById('step3');
     const step4 = document.getElementById('step4');
+    const verifyError = document.getElementById('verifyError');
 
-    verificationForm.addEventListener('submit', (e) => {
+    // Step 2: Verify
+    document.getElementById('verificationForm').addEventListener('submit', async (e) => {
       e.preventDefault();
       const email = document.getElementById('school-email').value.toLowerCase();
       const pass = document.getElementById('passphrase').value.trim();
-      const validDomain = email.endsWith(STUDENT_EMAIL_DOMAIN);
-      const passOk = pass === DEMO_PASSPHRASE;
-      if (!validDomain || !passOk) {
+      if (!email.endsWith(STUDENT_EMAIL_DOMAIN) || pass !== DEMO_PASSPHRASE) {
         verifyError.textContent = "Invalid email or passphrase.";
         verifyError.style.display = "block";
         return;
@@ -220,80 +218,51 @@
       });
     });
 
-    // Sign up
+    // Step 3: Signup
     document.getElementById('signupForm').addEventListener('submit', async (e) => {
       e.preventDefault();
       const email = document.getElementById('signup-email').value;
       const pw = document.getElementById('password').value;
       const pw2 = document.getElementById('password-confirm').value;
       if (pw !== pw2) return alert("Passwords do not match.");
-
       const { error } = await supabase.auth.signUp({ email, password: pw });
-      if (error) {
-        alert("Error signing up: " + error.message);
-        return;
-      }
-
+      if (error) return alert(error.message);
       step3.classList.add('hidden');
       step4.classList.remove('hidden');
     });
 
-    // Login
+    // Step 3: Login
     document.getElementById('loginForm').addEventListener('submit', async (e) => {
       e.preventDefault();
       const email = document.getElementById('login-email').value;
       const pw = document.getElementById('login-password').value;
-
       const { error } = await supabase.auth.signInWithPassword({ email, password: pw });
-      if (error) {
-        alert("Login failed: " + error.message);
-        return;
-      }
-
+      if (error) return alert(error.message);
       step3.classList.add('hidden');
       step4.classList.remove('hidden');
     });
 
-    // Save Profile to Supabase
-    async function saveProfile({ firstName, lastName, gender, studentClass }) {
+    // Step 4: Save Profile
+    document.getElementById('customForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) return alert("Not logged in!");
 
-      const { error } = await supabase.from("students").insert([
-        {
-          user_id: user.id,
-          first_name: firstName,
-          last_name: lastName,
-          gender,
-          class: studentClass
-        }
-      ]);
+      const profile = {
+        user_id: user.id,
+        first_name: document.getElementById('firstName').value,
+        last_name: document.getElementById('lastName').value,
+        gender: document.getElementById('gender').value,
+        class: document.getElementById('studentClass').value,
+        date_of_birth: document.getElementById('dob').value,
+        theme: document.getElementById('theme').value
+      };
 
-      if (error) {
-        console.error(error);
-        alert("Failed to save profile ❌");
-      } else {
-        alert("Profile saved successfully ✅");
-        window.location.href = "dashboard.html";
-      }
-    }
+      const { error } = await supabase.from("students").insert([profile]);
+      if (error) return alert("Failed to save profile: " + error.message);
 
-    // Customization form
-    document.getElementById('customForm').addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const fullName = document.getElementById('fullName').value;
-      const gender = document.getElementById('gender').value;
-      const studentClass = document.getElementById('studentClass').value;
-
-      const [firstName, ...rest] = fullName.trim().split(" ");
-      const lastName = rest.join(" ");
-
-      try {
-        await saveProfile({ firstName, lastName, gender, studentClass });
-      } catch (err) {
-        console.error("Error saving profile:", err);
-        alert("Failed to save profile ❌");
-      }
+      alert("Profile saved ✅");
+      window.open("dashboard.html", "_blank");
     });
   </script>
 </body>
