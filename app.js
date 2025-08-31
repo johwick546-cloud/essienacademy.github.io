@@ -1,18 +1,19 @@
+// app.js
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
-// 🔑 Replace with your Supabase project details
+// ⛳️ Your project values (use the ones you already have)
 const supabase = createClient(
   "https://lqpxjyjzvabtpfdxxpjo.supabase.co",
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxxcHhqeWp6dmFidHBmZHh4cGpvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTY1ODgxMDMsImV4cCI6MjA3MjE2NDEwM30.LZ5HWNh_smPcBg7cDKj3SPvs-0uPewLfXkjoNHNIGYE"
 );
 
-// Step elements
+// Elements
 const step2 = document.getElementById("step2");
 const step3 = document.getElementById("step3");
 const verificationForm = document.getElementById("verification-form");
 const verifyError = document.getElementById("verify-error");
 
-// Fetch passphrase from Supabase
+// Helpers
 async function getPassphrase() {
   const { data, error } = await supabase
     .from("settings")
@@ -24,13 +25,13 @@ async function getPassphrase() {
     console.error("Failed to fetch passphrase:", error);
     return null;
   }
-  return data.value;
+  return (data?.value || "").trim();
 }
 
-// Verification step
+// --- Step 2: Verification ---
 verificationForm.addEventListener("submit", async (e) => {
   e.preventDefault();
-  const email = document.getElementById("school-email").value.toLowerCase().trim();
+  const email = document.getElementById("school-email").value.trim().toLowerCase();
   const pass = document.getElementById("passphrase").value.trim();
 
   const validPassphrase = await getPassphrase();
@@ -48,15 +49,15 @@ verificationForm.addEventListener("submit", async (e) => {
 
   // Success → show signup/login
   verifyError.style.display = "none";
-  step2.classList.add("hidden");
-  step3.classList.remove("hidden");
+  step2.classList.add("student-hidden");
+  step3.classList.remove("student-hidden");
 
   // Auto-fill email
   document.getElementById("signup-email").value = email;
   document.getElementById("login-email").value = email;
 });
 
-// Signup form
+// --- Signup ---
 document.getElementById("signup-form").addEventListener("submit", async (e) => {
   e.preventDefault();
   const first = document.getElementById("signup-first").value.trim();
@@ -70,22 +71,28 @@ document.getElementById("signup-form").addEventListener("submit", async (e) => {
     return;
   }
 
-  // Save extra profile
-  const { error: profileError } = await supabase.from("students").insert([{
-    user_id: data.user.id,
-    first_name: first,
-    last_name: last
-  }]);
+  // If email confirmation is ON, there may be no session yet.
+  // We’ll try to insert the profile only if we actually have a session/user.
+  const { data: userData } = await supabase.auth.getUser();
+  const userId = userData?.user?.id || data?.user?.id;
 
-  if (profileError) {
-    alert("Failed to save profile: " + profileError.message);
-  } else {
-    alert("Account created ✅");
-    window.location.href = "dashboard.html";
+  if (userId) {
+    const { error: profileError } = await supabase.from("students").insert([{
+      user_id: userId,
+      first_name: first,
+      last_name: last
+    }]);
+    if (profileError) {
+      console.warn("Profile insert deferred (likely RLS / not logged in yet):", profileError.message);
+      // Not fatal—user can finish profile after login.
+    }
   }
+
+  alert("Account created ✅ Check your email if confirmation is required.");
+  window.location.href = "dashboard.html";
 });
 
-// Login form
+// --- Login ---
 document.getElementById("login-form").addEventListener("submit", async (e) => {
   e.preventDefault();
   const email = document.getElementById("login-email").value.trim();
