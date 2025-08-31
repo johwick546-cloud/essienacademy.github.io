@@ -2,268 +2,42 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Students | Essien's Excellence Academy</title>
-  <link rel="stylesheet" href="style.css" />
-  <style>
-    body {
-      text-align: center;
-    }
-    .hidden { display: none !important; }
-    .steps-wrap {
-      display: flex;
-      flex-direction: column;
-      gap: 2rem;
-      max-width: 600px;
-      margin: 0 auto;
-    }
-    .step-card {
-      border-radius: 20px;
-      padding: 2rem;
-    }
-    .form-grid {
-      display: grid;
-      gap: 1rem;
-      margin: 0 auto;
-      max-width: 400px;
-      text-align: left;
-    }
-    .input, select {
-      padding: 0.9rem 1rem;
-      border-radius: 12px;
-      border: 1px solid rgba(255,255,255,0.15);
-      background: rgba(255,255,255,0.06);
-      color: #fff;
-      outline: none;
-    }
-    .input::placeholder { color: #cfcfcf; }
-    .error {
-      margin-top: 0.75rem;
-      background: rgba(255, 69, 58, 0.15);
-      border: 1px solid rgba(255, 69, 58, 0.35);
-      color: #ffb3ad;
-      padding: 0.75rem 1rem;
-      border-radius: 12px;
-      display: none;
-      text-align: center;
-    }
-    .tabs {
-      display: flex;
-      justify-content: center;
-      gap: 0.5rem;
-      margin-bottom: 1rem;
-      flex-wrap: wrap;
-    }
-    .tab-btn {
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.15);
-      border-radius: 999px;
-      padding: 0.6rem 1rem;
-      cursor: pointer;
-      color: #fff;
-    }
-    .tab-btn.active {
-      background: orange;
-      color: #000;
-    }
-    .tab-panel { display: none; }
-    .tab-panel.active { display: block; }
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Student Portal | Essien's Excellence Academy</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-  <nav class="glass-nav">
-    <div class="logo">Essien's Excellence Academy</div>
-    <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="academics.html">Academics</a></li>
-      <li><a href="admissions.html">Admissions</a></li>
-      <li><a href="students.html" class="active">Students</a></li>
-      <li><a href="parents.html">Parents</a></li>
-    </ul>
-  </nav>
-
-  <main class="page-section">
-    <h1>Student Life & Portal</h1>
-    <p>Access your learning tools, track progress, and stay connected with your school community.</p>
-
-    <div class="steps-wrap">
-
-      <!-- STEP 2 -->
-      <section id="step2" class="liquid-glass step-card">
-        <h2>Verify Your Student Status</h2>
-        <form id="verificationForm" class="form-grid" novalidate>
-          <label><strong>School Email</strong></label>
-          <input class="input" type="email" id="school-email" placeholder="first.last@essienacademy.edu.ng" required />
-          <label><strong>Secret Passphrase</strong></label>
-          <input class="input" type="text" id="passphrase" placeholder="Enter passphrase" required />
-          <button type="submit" class="cta-button">Verify & Continue</button>
-          <div id="verifyError" class="error"></div>
-        </form>
-      </section>
-
-      <!-- STEP 3 -->
-      <section id="step3" class="liquid-glass step-card hidden">
-        <h2>Access Your Account</h2>
-        <div class="tabs">
-          <button class="tab-btn active" data-tab="signup">Sign Up</button>
-          <button class="tab-btn" data-tab="login">Log In</button>
-        </div>
-        <div id="signup" class="tab-panel active">
-          <form id="signupForm" class="form-grid">
-            <label>Email</label>
-            <input class="input" type="email" id="signup-email" required />
-            <label>Create Password</label>
-            <input class="input" type="password" id="password" required />
-            <label>Confirm Password</label>
-            <input class="input" type="password" id="password-confirm" required />
-            <button type="submit" class="cta-button">Create Account</button>
-          </form>
-        </div>
-        <div id="login" class="tab-panel">
-          <form id="loginForm" class="form-grid">
-            <label>Email</label>
-            <input class="input" type="email" id="login-email" required />
-            <label>Password</label>
-            <input class="input" type="password" id="login-password" required />
-            <button type="submit" class="cta-button">Log In</button>
-          </form>
-        </div>
-      </section>
-
-      <!-- STEP 4 -->
-      <section id="step4" class="liquid-glass step-card hidden">
-        <h2>Customize Your Profile</h2>
-        <form id="customForm" class="form-grid">
-          <label>First Name</label>
-          <input class="input" type="text" id="firstName" required />
-
-          <label>Last Name</label>
-          <input class="input" type="text" id="lastName" required />
-
-          <label>Gender</label>
-          <select id="gender" class="input" required>
-            <option value="">--Select--</option>
-            <option>Male</option>
-            <option>Female</option>
-          </select>
-
-          <label>Class</label>
-          <select id="studentClass" class="input" required>
-            <option value="">--Select--</option>
-            <option>Basic 7</option>
-            <option>Basic 8</option>
-            <option>Basic 9</option>
-            <option>JHS 1</option>
-            <option>JHS 2</option>
-            <option>JHS 3</option>
-          </select>
-
-          <label>Date of Birth</label>
-          <input class="input" type="date" id="dob" required />
-
-          <label>Theme</label>
-          <select id="theme" class="input">
-            <option>Light</option>
-            <option>Dark</option>
-            <option>School Colors</option>
-          </select>
-
-          <button type="submit" class="cta-button">Save & Go to Dashboard</button>
-        </form>
-      </section>
-
+  <div class="container">
+    <!-- Step 2: Verification -->
+    <div class="card" id="step2">
+      <h2>Verify Your Student Status</h2>
+      <form id="verification-form">
+        <input type="email" id="school-email" placeholder="Enter your email" required />
+        <input type="password" id="passphrase" placeholder="Enter Passphrase" required />
+        <button type="submit">Verify</button>
+      </form>
+      <p class="error" id="verify-error"></p>
     </div>
-  </main>
 
-  <!-- Supabase -->
-  <script src="https://unpkg.com/@supabase/supabase-js"></script>
-  <script>
-    const supabase = supabase.createClient(
-      "https://YOUR_PROJECT_URL.supabase.co", 
-      "YOUR_ANON_KEY"
-    );
+    <!-- Step 3: Signup/Login -->
+    <div class="card hidden" id="step3">
+      <h2>Signup / Login</h2>
+      <form id="signup-form">
+        <input type="text" id="signup-first" placeholder="First Name" required />
+        <input type="text" id="signup-last" placeholder="Last Name" required />
+        <input type="email" id="signup-email" placeholder="Email" required />
+        <input type="password" id="signup-password" placeholder="Password" required />
+        <button type="submit">Create Account</button>
+      </form>
+      <hr class="divider"/>
+      <form id="login-form">
+        <input type="email" id="login-email" placeholder="Email" required />
+        <input type="password" id="login-password" placeholder="Password" required />
+        <button type="submit">Login</button>
+      </form>
+    </div>
+  </div>
 
-    const STUDENT_EMAIL_DOMAIN = "@essienacademy.edu.ng";
-    const DEMO_PASSPHRASE = "demo";
-
-    const step2 = document.getElementById('step2');
-    const step3 = document.getElementById('step3');
-    const step4 = document.getElementById('step4');
-    const verifyError = document.getElementById('verifyError');
-
-    // Step 2: Verify
-    document.getElementById('verificationForm').addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const email = document.getElementById('school-email').value.toLowerCase();
-      const pass = document.getElementById('passphrase').value.trim();
-      if (!email.endsWith(STUDENT_EMAIL_DOMAIN) || pass !== DEMO_PASSPHRASE) {
-        verifyError.textContent = "Invalid email or passphrase.";
-        verifyError.style.display = "block";
-        return;
-      }
-      step2.classList.add('hidden');
-      step3.classList.remove('hidden');
-      document.getElementById('signup-email').value = email;
-      document.getElementById('login-email').value = email;
-    });
-
-    // Tabs
-    document.querySelectorAll('.tab-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
-        document.getElementById(btn.dataset.tab).classList.add('active');
-      });
-    });
-
-    // Step 3: Signup
-    document.getElementById('signupForm').addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const email = document.getElementById('signup-email').value;
-      const pw = document.getElementById('password').value;
-      const pw2 = document.getElementById('password-confirm').value;
-      if (pw !== pw2) return alert("Passwords do not match.");
-      const { error } = await supabase.auth.signUp({ email, password: pw });
-      if (error) return alert(error.message);
-      step3.classList.add('hidden');
-      step4.classList.remove('hidden');
-    });
-
-    // Step 3: Login
-    document.getElementById('loginForm').addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const email = document.getElementById('login-email').value;
-      const pw = document.getElementById('login-password').value;
-      const { error } = await supabase.auth.signInWithPassword({ email, password: pw });
-      if (error) return alert(error.message);
-      step3.classList.add('hidden');
-      step4.classList.remove('hidden');
-    });
-
-    // Step 4: Save Profile
-    document.getElementById('customForm').addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const { data: { user } } = await supabase.auth.getUser();
-      if (!user) return alert("Not logged in!");
-
-      const profile = {
-        user_id: user.id,
-        first_name: document.getElementById('firstName').value,
-        last_name: document.getElementById('lastName').value,
-        gender: document.getElementById('gender').value,
-        class: document.getElementById('studentClass').value,
-        date_of_birth: document.getElementById('dob').value,
-        theme: document.getElementById('theme').value
-      };
-
-      const { error } = await supabase.from("students").insert([profile]);
-      if (error) return alert("Failed to save profile: " + error.message);
-
-      alert("Profile saved ✅");
-      window.open("dashboard.html", "_blank");
-    });
-  </script>
+  <script type="module" src="app.js"></script>
 </body>
 </html>
