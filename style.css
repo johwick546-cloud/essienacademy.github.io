@@ -1,1 +1,66 @@
-
+<style>
+    .hidden { display: none !important; }
+    .steps-wrap {
+      display: grid;
+      gap: 2rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .step-card {
+      border-radius: 20px;
+      padding: 2rem;
+    }
+    .form-grid {
+      display: grid;
+      gap: 1rem;
+      max-width: 520px;
+      margin: 0 auto; /* center align */
+    }
+    .input, select {
+      padding: 0.9rem 1rem;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.15);
+      background: rgba(255,255,255,0.06);
+      color: #fff;
+      outline: none;
+    }
+    .input::placeholder { color: #cfcfcf; }
+    .help { font-size: 0.9rem; opacity: 0.85; margin-top: -0.25rem; }
+    .error {
+      margin-top: 0.75rem;
+      background: rgba(255, 69, 58, 0.15);
+      border: 1px solid rgba(255, 69, 58, 0.35);
+      color: #ffb3ad;
+      padding: 0.75rem 1rem;
+      border-radius: 12px;
+      display: none;
+    }
+    .tabs {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .tab-btn {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 999px;
+      padding: 0.6rem 1rem;
+      cursor: pointer;
+      color: #fff;
+    }
+    .tab-btn.active {
+      background: orange;
+      color: #000;
+    }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+    .muted {
+      opacity: 0.9;
+      margin-top: 0.25rem;
+      font-size: 0.95rem;
+      text-align: center;
+    }
+    h1, h2, p { text-align: center; }
+  </style>
