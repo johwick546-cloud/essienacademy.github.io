@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Student Portal | Essien's Excellence Academy</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="container">
@@ -29,7 +29,7 @@
         <input type="password" id="signup-password" placeholder="Password" required />
         <button type="submit">Create Account</button>
       </form>
-      <hr class="divider" />
+      <hr class="divider"/>
       <form id="login-form">
         <input type="email" id="login-email" placeholder="Email" required />
         <input type="password" id="login-password" placeholder="Password" required />
@@ -38,106 +38,6 @@
     </div>
   </div>
 
-  <script type="module">
-    import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
-
-    const supabase = createClient(
-      "https://lqpxjyjzvabtpfdxxpjo.supabase.co",
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxxcHhqeWp6dmFidHBmZHh4cGpvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTY1ODgxMDMsImV4cCI6MjA3MjE2NDEwM30.LZ5HWNh_smPcBg7cDKj3SPvs-0uPewLfXkjoNHNIGYE"
-    );
-
-    // Step elements
-    const step2 = document.getElementById("step2");
-    const step3 = document.getElementById("step3");
-    const verificationForm = document.getElementById("verification-form");
-    const verifyError = document.getElementById("verify-error");
-
-    // Fetch passphrase from Supabase
-    async function getPassphrase() {
-      const { data, error } = await supabase
-        .from("settings")
-        .select("value")
-        .eq("key", "student_passphrase")
-        .single();
-
-      if (error) {
-        console.error("Failed to fetch passphrase:", error);
-        return null;
-      }
-      return data.value;
-    }
-
-    // Verification step
-    verificationForm.addEventListener("submit", async (e) => {
-      e.preventDefault();
-      const email = document.getElementById("school-email").value.toLowerCase().trim();
-      const pass = document.getElementById("passphrase").value.trim();
-
-      const validPassphrase = await getPassphrase();
-      if (!validPassphrase) {
-        verifyError.textContent = "⚠️ Could not load passphrase. Try again later.";
-        verifyError.style.display = "block";
-        return;
-      }
-
-      if (pass !== validPassphrase) {
-        verifyError.textContent = "❌ Incorrect passphrase. Try again.";
-        verifyError.style.display = "block";
-        return;
-      }
-
-      // Success → show signup/login
-      verifyError.style.display = "none";
-      step2.classList.add("hidden");
-      step3.classList.remove("hidden");
-
-      // Auto-fill email
-      document.getElementById("signup-email").value = email;
-      document.getElementById("login-email").value = email;
-    });
-
-    // Signup form
-    document.getElementById("signup-form").addEventListener("submit", async (e) => {
-      e.preventDefault();
-      const first = document.getElementById("signup-first").value.trim();
-      const last = document.getElementById("signup-last").value.trim();
-      const email = document.getElementById("signup-email").value.trim();
-      const password = document.getElementById("signup-password").value.trim();
-
-      const { data, error } = await supabase.auth.signUp({ email, password });
-      if (error) {
-        alert("Signup failed: " + error.message);
-        return;
-      }
-
-      // Save extra profile
-      const { error: profileError } = await supabase.from("students").insert([{
-        user_id: data.user.id,
-        first_name: first,
-        last_name: last
-      }]);
-
-      if (profileError) {
-        alert("Failed to save profile: " + profileError.message);
-      } else {
-        alert("Account created ✅");
-        window.location.href = "dashboard.html";
-      }
-    });
-
-    // Login form
-    document.getElementById("login-form").addEventListener("submit", async (e) => {
-      e.preventDefault();
-      const email = document.getElementById("login-email").value.trim();
-      const password = document.getElementById("login-password").value.trim();
-
-      const { error } = await supabase.auth.signInWithPassword({ email, password });
-      if (error) {
-        alert("Login failed: " + error.message);
-        return;
-      }
-      window.location.href = "dashboard.html";
-    });
-  </script>
+  <script type="module" src="app.js"></script>
 </body>
 </html>
