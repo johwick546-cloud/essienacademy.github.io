@@ -169,3 +169,24 @@ body {
     text-align: center;
   }
 }
+/* ====== DARK MODE ====== */
+body[data-theme="dark"] {
+  background: var(--color-dark);
+  color: var(--color-light);
+}
+
+body[data-theme="dark"] .site-header,
+body[data-theme="dark"] .site-footer,
+body[data-theme="dark"] .site-nav {
+  background: rgba(17, 34, 78, 0.8); /* darker glass */
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+body[data-theme="dark"] .site-logo,
+body[data-theme="dark"] a {
+  color: var(--color-light);
+}
+
+body[data-theme="dark"] .menu-toggle span {
+  background: var(--color-light);
+}
