@@ -7,7 +7,6 @@ baseurl: ""   # leave this empty unless site is in a subfolder
 url: "https://your-username.github.io"   # replace with your actual GitHub Pages URL
 
 # Theme (we will override styles with custom CSS/JS)
-theme: minima
 
 # Navigation links (will be turned into a responsive hamburger menu in HTML/JS)
 nav_links:
