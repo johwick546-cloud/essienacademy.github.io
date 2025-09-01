@@ -190,3 +190,105 @@ body[data-theme="dark"] a {
 body[data-theme="dark"] .menu-toggle span {
   background: var(--color-light);
 }
+/* ===== HERO SECTION ===== */
+.hero {
+  background: linear-gradient(rgba(17, 34, 78, 0.8), rgba(17, 34, 78, 0.8)), 
+              url('/assets/images/school-hero.jpg') center/cover no-repeat;
+  color: #fafafa;
+  padding: 6rem 2rem;
+  text-align: center;
+  border-radius: 1.5rem;
+  margin: 1rem;
+}
+
+.hero h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+/* ===== FEATURES ===== */
+.features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin: 3rem auto;
+}
+
+.feature-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  border-radius: 1.2rem;
+  padding: 2rem;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+/* ===== CTA SECTION ===== */
+.cta {
+  background: linear-gradient(135deg, #11224E, #F87B1B);
+  color: #fafafa;
+  padding: 4rem 2rem;
+  text-align: center;
+  border-radius: 1.5rem;
+  margin: 2rem;
+}
+
+.cta h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.cta p {
+  margin-bottom: 2rem;
+}
+
+/* ===== BUTTONS ===== */
+.btn {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  border-radius: 2rem;
+  font-weight: bold;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.btn-primary {
+  background: #F87B1B;
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: #d96c18;
+}
+
+.btn-secondary {
+  background: #fafafa;
+  color: #11224E;
+}
+
+.btn-secondary:hover {
+  background: #e0e0e0;
+}
+
+.btn-link {
+  display: inline-block;
+  margin-top: 1rem;
+  color: #F87B1B;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.btn-link:hover {
+  color: #d96c18;
+}
