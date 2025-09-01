@@ -1,12 +1,18 @@
+# _config.yml
 title: Essien's Excellence Academy
 description: "Rest not, aspire a greater height"
-baseurl: "" # leave this empty unless your site is in a subfolder
-url: "https://your-username.github.io" # change to your GitHub Pages URL
 
-theme: minima  # or remove this if you're using only custom HTML/CSS
+# Base settings
+baseurl: ""   # leave this empty unless site is in a subfolder
+url: "https://your-username.github.io"   # replace with your actual GitHub Pages URL
 
-# Navigation links (optional)
+# Theme (we will override styles with custom CSS/JS)
+theme: minima
+
+# Navigation links (will be turned into a responsive hamburger menu in HTML/JS)
 nav_links:
+  - title: "Home"
+    url: /
   - title: "Academics"
     url: /academics.html
   - title: "Admissions"
@@ -15,3 +21,18 @@ nav_links:
     url: /students.html
   - title: "Parents"
     url: /parents.html
+  - title: "Contact"
+    url: /contact.html
+
+# Default colors (used in CSS theme)
+colors:
+  light_bg: "#fafafa"
+  dark_bg: "#11224E"
+  accent: "#F87B1B"
+  text_dark: "#222222"
+  text_light: "#ffffff"
+
+# Plugins (optional, for better GitHub Pages integration)
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
