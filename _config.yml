@@ -35,3 +35,6 @@ colors:
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
+
+include:
+  - assets
