@@ -261,25 +261,22 @@
             margin-top: 20px;
         }
         
-        /* Form Feedback Messages */
+        /* Form Submission Feedback */
         .form-feedback {
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 20px;
             text-align: center;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 8px;
             display: none;
-            font-weight: 500;
         }
         
         .form-success {
             background: rgba(46, 204, 113, 0.2);
-            color: #fff;
             border: 1px solid rgba(46, 204, 113, 0.5);
         }
         
         .form-error {
             background: rgba(231, 76, 60, 0.2);
-            color: #fff;
             border: 1px solid rgba(231, 76, 60, 0.5);
         }
         
@@ -559,7 +556,6 @@
             <div class="form-container">
                 <form id="contact-form" action="https://formspree.io/f/xgvljrjo" method="POST">
                     <input type="hidden" name="_subject" value="New Contact Form Submission from Essien's Excellence Academy">
-                    <input type="hidden" name="_replyto" id="reply-to-email">
                     
                     <div class="form-row">
                         <div class="form-group">
@@ -711,72 +707,69 @@
             });
         });
 
-        // Form submission and validation
-        document.addEventListener('DOMContentLoaded', function() {
-            const form = document.getElementById('contact-form');
-            const formSuccess = document.getElementById('form-success');
-            const formError = document.getElementById('form-error');
-            const emailField = document.getElementById('email');
-            const replyToField = document.getElementById('reply-to-email');
+        // Form submission
+        document.getElementById('contact-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
             
-            // Update the reply-to field with the email value
-            emailField.addEventListener('input', function() {
-                replyToField.value = this.value;
-            });
+            // Basic validation
+            const requiredFields = this.querySelectorAll('[required]');
+            let allValid = true;
             
-            form.addEventListener('submit', function(event) {
-                // Simple validation
-                const requiredFields = form.querySelectorAll('[required]');
-                let valid = true;
-                
-                requiredFields.forEach(field => {
-                    if (!field.value.trim()) {
-                        valid = false;
-                        field.style.border = '2px solid #e74c3c';
-                    } else {
-                        field.style.border = '';
-                    }
-                });
-                
-                // Email validation
-                const emailValue = emailField.value.trim();
-                if (emailValue && !isValidEmail(emailValue)) {
-                    valid = false;
-                    emailField.style.border = '2px solid #e74c3c';
-                    formError.textContent = 'Please enter a valid email address.';
-                }
-                
-                if (!valid) {
-                    event.preventDefault();
-                    formError.style.display = 'block';
-                    formSuccess.style.display = 'none';
-                    
-                    // Scroll to error message
-                    formError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            requiredFields.forEach(field => {
+                if (!field.value.trim()) {
+                    allValid = false;
+                    field.style.borderColor = 'red';
                 } else {
-                    formError.style.display = 'none';
-                    
-                    // Set the reply-to value one more time before submission
-                    replyToField.value = emailField.value;
-                    
-                    // For Formspree, we let the form submit normally
-                    // The success message will be shown on the Formspree thank you page
+                    field.style.borderColor = '';
                 }
             });
             
-            // Clear error styles when user starts typing
-            const inputs = form.querySelectorAll('input, textarea, select');
-            inputs.forEach(input => {
-                input.addEventListener('input', function() {
-                    this.style.border = '';
-                    formError.style.display = 'none';
-                });
-            });
-            
-            // Email validation function
-            function isValidEmail(email) {
-                const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                return re.test(email);
+            if (allValid) {
+                // Show loading state
+                const submitBtn = this.querySelector('button[type="submit"]');
+                const originalText = submitBtn.textContent;
+                submitBtn.textContent = 'Sending...';
+                submitBtn.disabled = true;
+                
+                // Hide previous messages
+                document.getElementById('form-error').style.display = 'none';
+                
+                try {
+                    // Send to Formspree
+                    const formData = new FormData(this);
+                    const response = await fetch(this.action, {
+                        method: 'POST',
+                        body: formData,
+                        headers: {
+                            'Accept': 'application/json'
+                        }
+                    });
+                    
+                    if (response.ok) {
+                        // Show success message
+                        document.getElementById('form-success').style.display = 'block';
+                        
+                        // Reset form after successful submission
+                        setTimeout(() => {
+                            this.reset();
+                            document.getElementById('form-success').style.display = 'none';
+                        }, 5000);
+                    } else {
+                        throw new Error('Form submission failed');
+                    }
+                } catch (error) {
+                    // Show error message
+                    document.getElementById('form-error').style.display = 'block';
+                    document.getElementById('form-error').textContent = 'There was a problem with your submission. Please try again.';
+                } finally {
+                    // Reset button state
+                    submitBtn.textContent = originalText;
+                    submitBtn.disabled = false;
+                }
+            } else {
+                // Show error message
+                document.getElementById('form-error').style.display = 'block';
+                document.getElementById('form-success').style.display = 'none';
             }
         });
     </script>
