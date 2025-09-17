@@ -502,7 +502,7 @@
         <div class="animated-circle" style="width: 250px; height: 250px; top: 30%; left: 50%; animation-delay: -10s;"></div>
     </div>
 
-    <!-- Header with Navigation -->
+    <!-- Header -->
     <header class="glass-effect">
         <div class="container">
             <div class="header-content">
@@ -608,22 +608,24 @@
         <div class="application glass-effect">
             <h3>Application Form</h3>
             <div class="form-container">
-                <form id="admission-form">
+                <form id="admission-form" action="https://formspree.io/f/xgvljrjo" method="POST">
+                    <input type="hidden" name="_subject" value="New Admission Application from Website">
+                    
                     <div class="form-row">
                         <div class="form-group">
                             <label for="firstName">Student's First Name *</label>
-                            <input type="text" id="firstName" class="form-control" required>
+                            <input type="text" id="firstName" name="firstName" class="form-control" required>
                         </div>
                         <div class="form-group">
                             <label for="lastName">Student's Last Name *</label>
-                            <input type="text" id="lastName" class="form-control" required>
+                            <input type="text" id="lastName" name="lastName" class="form-control" required>
                         </div>
                     </div>
                     
                     <div class="form-row">
                         <div class="form-group">
                             <label for="grade">Grade Applying For *</label>
-                            <select id="grade" class="form-control" required>
+                            <select id="grade" name="grade" class="form-control" required>
                                 <option value="">Select Grade</option>
                                 <option value="p1">Primary 1</option>
                                 <option value="p2">Primary 2</option>
@@ -638,45 +640,45 @@
                         </div>
                         <div class="form-group">
                             <label for="dob">Date of Birth *</label>
-                            <input type="date" id="dob" class="form-control" required>
+                            <input type="date" id="dob" name="dob" class="form-control" required>
                         </div>
                     </div>
                     
                     <div class="form-group">
                         <label for="currentSchool">Current School</label>
-                        <input type="text" id="currentSchool" class="form-control">
+                        <input type="text" id="currentSchool" name="currentSchool" class="form-control">
                     </div>
                     
                     <div class="form-row">
                         <div class="form-group">
                             <label for="parentName">Parent/Guardian Name *</label>
-                            <input type="text" id="parentName" class="form-control" required>
+                            <input type="text" id="parentName" name="parentName" class="form-control" required>
                         </div>
                         <div class="form-group">
                             <label for="relationship">Relationship to Student *</label>
-                            <input type="text" id="relationship" class="form-control" required>
+                            <input type="text" id="relationship" name="relationship" class="form-control" required>
                         </div>
                     </div>
                     
                     <div class="form-row">
                         <div class="form-group">
                             <label for="email">Email Address *</label>
-                            <input type="email" id="email" class="form-control" required>
+                            <input type="email" id="email" name="email" class="form-control" required>
                         </div>
                         <div class="form-group">
                             <label for="phone">Phone Number *</label>
-                            <input type="tel" id="phone" class="form-control" required>
+                            <input type="tel" id="phone" name="phone" class="form-control" required>
                         </div>
                     </div>
                     
                     <div class="form-group">
                         <label for="address">Full Address *</label>
-                        <textarea id="address" class="form-control" required></textarea>
+                        <textarea id="address" name="address" class="form-control" required></textarea>
                     </div>
                     
                     <div class="form-group">
                         <label for="message">Why are you interested in Essien's Excellence Academy? *</label>
-                        <textarea id="message" class="form-control" required></textarea>
+                        <textarea id="message" name="message" class="form-control" required></textarea>
                     </div>
                     
                     <!-- Form feedback messages -->
@@ -807,7 +809,7 @@
         });
 
         // Form submission
-        document.getElementById('admission-form').addEventListener('submit', function(e) {
+        document.getElementById('admission-form').addEventListener('submit', async function(e) {
             e.preventDefault();
             
             // Basic validation
@@ -824,18 +826,47 @@
             });
             
             if (allValid) {
-                // Show success message
-                document.getElementById('form-success').style.display = 'block';
+                // Show loading state
+                const submitBtn = this.querySelector('button[type="submit"]');
+                const originalText = submitBtn.textContent;
+                submitBtn.textContent = 'Submitting...';
+                submitBtn.disabled = true;
+                
+                // Hide previous messages
                 document.getElementById('form-error').style.display = 'none';
                 
-                // In a real application, you would send the form data to a server here
-                console.log('Form submitted successfully');
-                
-                // Reset form after successful submission
-                setTimeout(() => {
-                    this.reset();
-                    document.getElementById('form-success').style.display = 'none';
-                }, 3000);
+                try {
+                    // Send to Formspree
+                    const formData = new FormData(this);
+                    const response = await fetch(this.action, {
+                        method: 'POST',
+                        body: formData,
+                        headers: {
+                            'Accept': 'application/json'
+                        }
+                    });
+                    
+                    if (response.ok) {
+                        // Show success message
+                        document.getElementById('form-success').style.display = 'block';
+                        
+                        // Reset form after successful submission
+                        setTimeout(() => {
+                            this.reset();
+                            document.getElementById('form-success').style.display = 'none';
+                        }, 5000);
+                    } else {
+                        throw new Error('Form submission failed');
+                    }
+                } catch (error) {
+                    // Show error message
+                    document.getElementById('form-error').style.display = 'block';
+                    document.getElementById('form-error').textContent = 'There was a problem with your submission. Please try again.';
+                } finally {
+                    // Reset button state
+                    submitBtn.textContent = originalText;
+                    submitBtn.disabled = false;
+                }
             } else {
                 // Show error message
                 document.getElementById('form-error').style.display = 'block';
