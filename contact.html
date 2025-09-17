@@ -559,7 +559,7 @@
             <div class="form-container">
                 <form id="contact-form" action="https://formspree.io/f/xgvljrjo" method="POST">
                     <input type="hidden" name="_subject" value="New Contact Form Submission from Essien's Excellence Academy">
-                    <input type="hidden" name="_replyto" value="%email">
+                    <input type="hidden" name="_replyto" id="reply-to-email">
                     
                     <div class="form-row">
                         <div class="form-group">
@@ -716,6 +716,13 @@
             const form = document.getElementById('contact-form');
             const formSuccess = document.getElementById('form-success');
             const formError = document.getElementById('form-error');
+            const emailField = document.getElementById('email');
+            const replyToField = document.getElementById('reply-to-email');
+            
+            // Update the reply-to field with the email value
+            emailField.addEventListener('input', function() {
+                replyToField.value = this.value;
+            });
             
             form.addEventListener('submit', function(event) {
                 // Simple validation
@@ -731,6 +738,14 @@
                     }
                 });
                 
+                // Email validation
+                const emailValue = emailField.value.trim();
+                if (emailValue && !isValidEmail(emailValue)) {
+                    valid = false;
+                    emailField.style.border = '2px solid #e74c3c';
+                    formError.textContent = 'Please enter a valid email address.';
+                }
+                
                 if (!valid) {
                     event.preventDefault();
                     formError.style.display = 'block';
@@ -741,15 +756,11 @@
                 } else {
                     formError.style.display = 'none';
                     
-                    // In a real implementation, Formspree would handle the submission
-                    // This is just for demonstration purposes
-                    formSuccess.style.display = 'block';
+                    // Set the reply-to value one more time before submission
+                    replyToField.value = emailField.value;
                     
-                    // Scroll to success message
-                    formSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                    
-                    // For real usage, you would let the form submit to Formspree
-                    // The form will submit to Formspree automatically with the action attribute
+                    // For Formspree, we let the form submit normally
+                    // The success message will be shown on the Formspree thank you page
                 }
             });
             
@@ -761,6 +772,12 @@
                     formError.style.display = 'none';
                 });
             });
+            
+            // Email validation function
+            function isValidEmail(email) {
+                const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                return re.test(email);
+            }
         });
     </script>
 </body>
