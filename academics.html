@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admissions - Essien's Excellence Academy</title>
+    <title>Academics - Essien's Excellence Academy</title>
     <style>
         :root {
             --primary: #000000;
@@ -130,269 +130,228 @@
             opacity: 0.9;
         }
         
-        /* Process Section */
-        .process {
+        /* Programs Section */
+        .programs {
             padding: 50px;
             margin: 40px 0;
         }
         
-        .process h3 {
+        .programs h3 {
             text-align: center;
             font-size: 2rem;
             margin-bottom: 40px;
             color: var(--accent);
         }
         
-        .process-steps {
+        .programs-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 30px;
-            counter-reset: step-counter;
         }
         
-        .step {
+        .program-card {
             padding: 30px;
             text-align: center;
-            position: relative;
             transition: all 0.3s ease;
+            height: 100%;
         }
         
-        .step:hover {
+        .program-card:hover {
             transform: translateY(-10px);
         }
         
-        .step::before {
-            counter-increment: step-counter;
-            content: counter(step-counter);
-            position: absolute;
-            top: -20px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(45deg, var(--accent), var(--accent2));
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 1.2rem;
+        .program-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: var(--accent);
         }
         
-        .step h4 {
-            font-size: 1.4rem;
-            margin: 20px 0 15px;
+        .program-card h4 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
             color: var(--accent2);
         }
         
-        /* Requirements Section */
-        .requirements {
+        /* Curriculum Section */
+        .curriculum {
             padding: 50px;
             margin: 40px 0;
         }
         
-        .requirements h3 {
+        .curriculum h3 {
             text-align: center;
             font-size: 2rem;
             margin-bottom: 40px;
             color: var(--accent);
         }
         
-        .requirements-grid {
+        .grade-levels {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 25px;
         }
         
-        .requirement-card {
+        .grade {
             padding: 25px;
             transition: all 0.3s ease;
         }
         
-        .requirement-card:hover {
+        .grade:hover {
             transform: scale(1.03);
         }
         
-        .requirement-card h4 {
+        .grade h4 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: var(--accent2);
+            text-align: center;
+        }
+        
+        .subject-list {
+            list-style-type: none;
+        }
+        
+        .subject-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .subject-list li:last-child {
+            border-bottom: none;
+        }
+        
+        /* Resources Section */
+        .resources {
+            padding: 50px;
+            margin: 40px 0;
+        }
+        
+        .resources h3 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 40px;
+            color: var(--accent);
+        }
+        
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .resource-card {
+            padding: 25px;
+            transition: all 0.3s ease;
+        }
+        
+        .resource-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .resource-card h4 {
             font-size: 1.3rem;
             margin-bottom: 15px;
             color: var(--accent2);
         }
         
-        .requirement-list {
+        .resource-links {
             list-style-type: none;
         }
         
-        .requirement-list li {
-            padding: 10px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            display: flex;
-            align-items: center;
+        .resource-links li {
+            margin-bottom: 10px;
         }
         
-        .requirement-list li:last-child {
-            border-bottom: none;
+        .resource-links a {
+            color: var(--secondary);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: block;
+            padding: 8px;
+            border-radius: 5px;
         }
         
-        .requirement-list li::before {
-            content: "•";
+        .resource-links a:hover {
             color: var(--accent);
-            font-weight: bold;
-            display: inline-block;
-            width: 1em;
-            margin-right: 10px;
-            font-size: 1.2rem;
+            background: var(--glass-dark);
         }
         
-        /* Application Form */
-        .application {
+        /* Calendar Section */
+        .calendar {
             padding: 50px;
             margin: 40px 0;
         }
         
-        .application h3 {
+        .calendar h3 {
             text-align: center;
             font-size: 2rem;
             margin-bottom: 40px;
             color: var(--accent);
         }
         
-        .form-container {
+        .calendar-container {
             max-width: 800px;
             margin: 0 auto;
         }
         
-        .form-group {
-            margin-bottom: 25px;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
-        }
-        
-        .form-control {
-            width: 100%;
-            padding: 12px 15px;
-            background: var(--glass);
-            border: var(--border);
-            border-radius: 8px;
-            color: var(--secondary);
-            font-size: 1rem;
-            transition: all 0.3s ease;
-        }
-        
-        .form-control:focus {
-            outline: none;
-            border-color: var(--accent);
-            box-shadow: 0 0 0 2px rgba(30, 144, 255, 0.3);
-        }
-        
-        .form-row {
+        .calendar-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 10px;
+            text-align: center;
         }
         
-        textarea.form-control {
-            min-height: 120px;
-            resize: vertical;
+        .calendar-day {
+            padding: 15px 5px;
+            border-radius: 8px;
         }
         
-        .btn {
-            display: inline-block;
-            padding: 12px 30px;
+        .calendar-header {
+            font-weight: bold;
+            background: var(--glass-dark);
+        }
+        
+        .event {
             background: linear-gradient(45deg, var(--accent), var(--accent2));
             color: white;
-            text-decoration: none;
-            border-radius: 30px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            border: none;
             cursor: pointer;
+            position: relative;
         }
         
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        .event:hover::after {
+            content: attr(data-event);
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary);
+            color: var(--secondary);
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            white-space: nowrap;
+            z-index: 10;
         }
         
-        .btn-center {
-            text-align: center;
-            margin-top: 20px;
-        }
-        
-        /* Form Submission Feedback */
-        .form-feedback {
-            text-align: center;
-            padding: 20px;
-            margin-top: 20px;
-            border-radius: 8px;
-            display: none;
-        }
-        
-        .form-success {
-            background: rgba(46, 204, 113, 0.2);
-            border: 1px solid rgba(46, 204, 113, 0.5);
-        }
-        
-        .form-error {
-            background: rgba(231, 76, 60, 0.2);
-            border: 1px solid rgba(231, 76, 60, 0.5);
-        }
-        
-        /* FAQ Section */
-        .faq {
-            padding: 50px;
-            margin: 40px 0;
-        }
-        
-        .faq h3 {
-            text-align: center;
-            font-size: 2rem;
-            margin-bottom: 40px;
-            color: var(--accent);
-        }
-        
-        .faq-item {
-            margin-bottom: 20px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .faq-question {
-            padding: 20px;
-            cursor: pointer;
-            font-size: 1.2rem;
-            font-weight: 500;
+        .month-nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .month-nav button {
+            background: var(--glass);
+            border: var(--border);
+            color: var(--secondary);
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
             transition: all 0.3s ease;
         }
         
-        .faq-question:hover {
-            color: var(--accent);
-        }
-        
-        .faq-answer {
-            padding: 0 20px 20px;
-            color: #ccc;
-            line-height: 1.6;
-            display: none;
-        }
-        
-        .faq-toggle {
-            font-size: 1.5rem;
-            transition: transform 0.3s ease;
-        }
-        
-        .faq-item.active .faq-toggle {
-            transform: rotate(45deg);
-        }
-        
-        .faq-item.active .faq-answer {
-            display: block;
+        .month-nav button:hover {
+            background: var(--accent);
         }
         
         /* Footer */
@@ -451,13 +410,19 @@
                 font-size: 2.5rem;
             }
             
-            .process-steps,
-            .requirements-grid {
+            .programs-grid,
+            .grade-levels,
+            .resources-grid {
                 grid-template-columns: 1fr;
             }
             
-            .form-row {
-                grid-template-columns: 1fr;
+            .calendar-grid {
+                gap: 5px;
+            }
+            
+            .calendar-day {
+                padding: 8px 2px;
+                font-size: 0.8rem;
             }
         }
         
@@ -502,7 +467,7 @@
         <div class="animated-circle" style="width: 250px; height: 250px; top: 30%; left: 50%; animation-delay: -10s;"></div>
     </div>
 
-    <!-- Header with Navigation -->
+    <!-- Header -->
     <header class="glass-effect">
         <div class="container">
             <div class="header-content">
@@ -514,8 +479,8 @@
                     <ul>
                         <li><a href="index.html">Home</a></li>
                         <li><a href="about.html">About</a></li>
-                        <li><a href="academics.html">Academics</a></li>
-                        <li><a href="admissions.html" style="color: var(--accent); background: var(--glass-dark);">Admissions</a></li>
+                        <li><a href="academics.html" style="color: var(--accent); background: var(--glass-dark);">Academics</a></li>
+                        <li><a href="admissions.html">Admissions</a></li>
                         <li><a href="contact.html">Contact</a></li>
                     </ul>
                 </nav>
@@ -526,228 +491,156 @@
     <!-- Page Title -->
     <section class="page-title">
         <div class="container">
-            <h2>Admissions Process</h2>
-            <p>Begin your journey to excellence at Essien's Excellence Academy</p>
+            <h2>Academic Programs</h2>
+            <p>Excellence in education with a Christ-centered approach for elementary through JHS students</p>
         </div>
     </section>
 
-    <!-- Process Section -->
+    <!-- Programs Section -->
     <section class="container">
-        <div class="process glass-effect">
-            <h3>Our Admissions Process</h3>
-            <div class="process-steps">
-                <div class="step">
-                    <h4>Inquiry</h4>
-                    <p>Submit an online inquiry form or visit our campus to learn more about our programs and community.</p>
+        <div class="programs glass-effect">
+            <h3>Our Academic Programs</h3>
+            <div class="programs-grid">
+                <div class="program-card">
+                    <div class="program-icon">🔬</div>
+                    <h4>STEM Education</h4>
+                    <p>Hands-on Science, Technology, Engineering, and Mathematics program with modern labs and project-based learning.</p>
                 </div>
-                <div class="step">
-                    <h4>Application</h4>
-                    <p>Complete our online application form and submit all required documentation.</p>
+                <div class="program-card">
+                    <div class="program-icon">📚</div>
+                    <h4>Literacy Focus</h4>
+                    <p>Comprehensive reading and writing program that develops critical thinking and communication skills.</p>
                 </div>
-                <div class="step">
-                    <h4>Assessment</h4>
-                    <p>Students will be invited for an assessment to determine appropriate grade placement.</p>
+                <div class="program-card">
+                    <div class="program-icon">➕</div>
+                    <h4>Mathematics Excellence</h4>
+                    <p>Building strong mathematical foundations with practical applications and problem-solving techniques.</p>
                 </div>
-                <div class="step">
-                    <h4>Interview</h4>
-                    <p>Families will meet with our admissions team for an interview and campus tour.</p>
+                <div class="program-card">
+                    <div class="program-icon">🌍</div>
+                    <h4>Global Studies</h4>
+                    <p>Cultural awareness and global perspective integrated across all subject areas.</p>
                 </div>
-                <div class="step">
-                    <h4>Acceptance</h4>
-                    <p>Receive your admission decision and welcome package within 2 weeks of assessment.</p>
+                <div class="program-card">
+                    <div class="program-icon">⛪</div>
+                    <h4>Christian Education</h4>
+                    <p>Bible studies and values integration throughout the curriculum to develop Christlike character.</p>
                 </div>
-                <div class="step">
-                    <h4>Enrollment</h4>
-                    <p>Complete enrollment paperwork and submit tuition payment to secure your spot.</p>
+                <div class="program-card">
+                    <div class="program-icon">🎨</div>
+                    <h4>Arts Integration</h4>
+                    <p>Creative arts programs that enhance learning and self-expression across all subjects.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Requirements Section -->
+    <!-- Curriculum Section -->
     <section class="container">
-        <div class="requirements glass-effect">
-            <h3>Admissions Requirements</h3>
-            <div class="requirements-grid">
-                <div class="requirement-card">
-                    <h4>Elementary School (P1-P3)</h4>
-                    <ul class="requirement-list">
-                        <li>Completed application form</li>
-                        <li>Birth certificate</li>
-                        <li>Immunization records</li>
-                        <li>Two recent passport photos</li>
-                        <li>Previous school records (if applicable)</li>
+        <div class="curriculum glass-effect">
+            <h3>Curriculum Overview</h3>
+            <div class="grade-levels">
+                <div class="grade">
+                    <h4>Lower Elementary (P1-P3)</h4>
+                    <ul class="subject-list">
+                        <li>Literacy & Language Arts</li>
+                        <li>Numeracy & Mathematics</li>
+                        <li>Environmental Studies</li>
+                        <li>Creative Arts</li>
+                        <li>Physical Education</li>
+                        <li>Bible Studies</li>
                     </ul>
                 </div>
-                <div class="requirement-card">
+                <div class="grade">
                     <h4>Upper Elementary (P4-P6)</h4>
-                    <ul class="requirement-list">
-                        <li>All elementary requirements</li>
-                        <li>Academic transcripts from previous school</li>
-                        <li>Standardized test results (if available)</li>
-                        <li>Teacher recommendation form</li>
-                        <li>Student writing sample</li>
+                    <ul class="subject-list">
+                        <li>English Language</li>
+                        <li>Mathematics</li>
+                        <li>Integrated Science</li>
+                        <li>Social Studies</li>
+                        <li>ICT Fundamentals</li>
+                        <li>French Language</li>
+                        <li>Bible Studies</li>
                     </ul>
                 </div>
-                <div class="requirement-card">
+                <div class="grade">
                     <h4>Junior High (JHS 1-3)</h4>
-                    <ul class="requirement-list">
-                        <li>All upper elementary requirements</li>
-                        <li>Complete academic records</li>
-                        <li>Mathematics and English placement tests</li>
-                        <li>Two teacher recommendations</li>
-                        <li>Personal statement from student</li>
+                    <ul class="subject-list">
+                        <li>English Language</li>
+                        <li>Mathematics</li>
+                        <li>Integrated Science</li>
+                        <li>Social Studies</li>
+                        <li>ICT</li>
+                        <li>French</li>
+                        <li>Ghanaian Language</li>
+                        <li>Bible Studies</li>
+                        <li>Pre-Technical Skills</li>
                     </ul>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Application Form -->
+    <!-- Resources Section -->
     <section class="container">
-        <div class="application glass-effect">
-            <h3>Application Form</h3>
-            <div class="form-container">
-                <form id="admission-form">
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="firstName">Student's First Name *</label>
-                            <input type="text" id="firstName" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="lastName">Student's Last Name *</label>
-                            <input type="text" id="lastName" class="form-control" required>
-                        </div>
-                    </div>
-                    
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="grade">Grade Applying For *</label>
-                            <select id="grade" class="form-control" required>
-                                <option value="">Select Grade</option>
-                                <option value="p1">Primary 1</option>
-                                <option value="p2">Primary 2</option>
-                                <option value="p3">Primary 3</option>
-                                <option value="p4">Primary 4</option>
-                                <option value="p5">Primary 5</option>
-                                <option value="p6">Primary 6</option>
-                                <option value="jhs1">JHS 1</option>
-                                <option value="jhs2">JHS 2</option>
-                                <option value="jhs3">JHS 3</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="dob">Date of Birth *</label>
-                            <input type="date" id="dob" class="form-control" required>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="currentSchool">Current School</label>
-                        <input type="text" id="currentSchool" class="form-control">
-                    </div>
-                    
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="parentName">Parent/Guardian Name *</label>
-                            <input type="text" id="parentName" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="relationship">Relationship to Student *</label>
-                            <input type="text" id="relationship" class="form-control" required>
-                        </div>
-                    </div>
-                    
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="email">Email Address *</label>
-                            <input type="email" id="email" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="phone">Phone Number *</label>
-                            <input type="tel" id="phone" class="form-control" required>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="address">Full Address *</label>
-                        <textarea id="address" class="form-control" required></textarea>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="message">Why are you interested in Essien's Excellence Academy? *</label>
-                        <textarea id="message" class="form-control" required></textarea>
-                    </div>
-                    
-                    <!-- Form feedback messages -->
-                    <div id="form-success" class="form-feedback form-success">
-                        Thank you for your application! We will contact you shortly.
-                    </div>
-                    
-                    <div id="form-error" class="form-feedback form-error">
-                        Please fill in all required fields.
-                    </div>
-                    
-                    <div class="btn-center">
-                        <button type="submit" class="btn">Submit Application</button>
-                    </div>
-                </form>
+        <div class="resources glass-effect">
+            <h3>Student Resources</h3>
+            <div class="resources-grid">
+                <div class="resource-card">
+                    <h4>Learning Materials</h4>
+                    <ul class="resource-links">
+                        <li><a href="#">Textbook Lists by Grade</a></li>
+                        <li><a href="#">Recommended Reading</a></li>
+                        <li><a href="#">Study Guides</a></li>
+                        <li><a href="#">Past Exam Papers</a></li>
+                        <li><a href="#">Research Resources</a></li>
+                    </ul>
+                </div>
+                <div class="resource-card">
+                    <h4>Digital Tools</h4>
+                    <ul class="resource-links">
+                        <li><a href="#">Online Library Access</a></li>
+                        <li><a href="#">Educational Apps</a></li>
+                        <li><a href="#">Learning Platforms</a></li>
+                        <li><a href="#">Coding Resources</a></li>
+                        <li><a href="#">Digital Citizenship</a></li>
+                    </ul>
+                </div>
+                <div class="resource-card">
+                    <h4>Academic Support</h4>
+                    <ul class="resource-links">
+                        <li><a href="#">Tutoring Schedule</a></li>
+                        <li><a href="#">Homework Help</a></li>
+                        <li><a href="#">Study Skills Tips</a></li>
+                        <li><a href="#">Test Preparation</a></li>
+                        <li><a href="#">Teacher Office Hours</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- FAQ Section -->
+    <!-- Calendar Section -->
     <section class="container">
-        <div class="faq glass-effect">
-            <h3>Frequently Asked Questions</h3>
-            
-            <div class="faq-item">
-                <div class="faq-question">
-                    What is the application deadline?
-                    <span class="faq-toggle">+</span>
+        <div class="calendar glass-effect">
+            <h3>Academic Calendar</h3>
+            <div class="calendar-container">
+                <div class="month-nav">
+                    <button id="prev-month">← Previous</button>
+                    <h4 id="current-month">September 2025</h4>
+                    <button id="next-month">Next →</button>
                 </div>
-                <div class="faq-answer">
-                    We have rolling admissions, but priority is given to applications received before March 31st for the following academic year.
-                </div>
-            </div>
-            
-            <div class="faq-item">
-                <div class="faq-question">
-                    Is financial aid available?
-                    <span class="faq-toggle">+</span>
-                </div>
-                <div class="faq-answer">
-                    Yes, we offer limited financial aid based on need and academic merit. Please contact our admissions office for more information.
-                </div>
-            </div>
-            
-            <div class="faq-item">
-                <div class="faq-question">
-                    What are the school hours?
-                    <span class="faq-toggle">+</span>
-                </div>
-                <div class="faq-answer">
-                    School runs from 8:00 AM to 3:00 PM Monday through Friday. After-school programs are available until 5:30 PM.
-                </div>
-            </div>
-            
-            <div class="faq-item">
-                <div class="faq-question">
-                    Do you offer transportation services?
-                    <span class="faq-toggle">+</span>
-                </div>
-                <div class="faq-answer">
-                    Yes, we have bus services available for students living within a 15km radius of the school.
-                </div>
-            </div>
-            
-            <div class="faq-item">
-                <div class="faq-question">
-                    What is the student-teacher ratio?
-                    <span class="faq-toggle">+</span>
-                </div>
-                <div class="faq-answer">
-                    We maintain a low student-teacher ratio of 15:1 to ensure personalized attention for each student.
+                <div class="calendar-grid">
+                    <div class="calendar-day calendar-header">Sun</div>
+                    <div class="calendar-day calendar-header">Mon</div>
+                    <div class="calendar-day calendar-header">Tue</div>
+                    <div class="calendar-day calendar-header">Wed</div>
+                    <div class="calendar-day calendar-header">Thu</div>
+                    <div class="calendar-day calendar-header">Fri</div>
+                    <div class="calendar-day calendar-header">Sat</div>
+                    
+                    <!-- Calendar days will be populated by JavaScript -->
+                    <div id="calendar-days"></div>
                 </div>
             </div>
         </div>
@@ -759,21 +652,23 @@
             <div class="footer-content">
                 <div class="footer-section">
                     <h3>Contact Us</h3>
-                    <p>Email: admissions@essienacademy.edu.gh</p>
+                    <p>Email: info@essienacademy.edu.gh</p>
                     <p>Phone: +233 XX XXX XXXX</p>
                     <p>Address: Education Street, Academic City, Ghana</p>
                 </div>
                 <div class="footer-section">
                     <h3>Quick Links</h3>
-                    <a href="admissions.html">Application Process</a>
-                    <a href="academics.html">Academic Programs</a>
+                    <a href="admissions.html">Admissions</a>
+                    <a href="academics.html">Academic Calendar</a>
                     <a href="policies.html">School Policies</a>
-                    <a href="resources.html">Tuition Information</a>
+                    <a href="resources.html">Lunch Menu</a>
                 </div>
                 <div class="footer-section">
-                    <h3>Schedule a Visit</h3>
-                    <p>We welcome campus tours throughout the year. Contact us to schedule your visit.</p>
-                    <a href="contact.html" class="btn" style="padding: 8px 20px; margin-top: 10px;">Schedule Tour</a>
+                    <h3>Follow Us</h3>
+                    <a href="#">Facebook</a>
+                    <a href="#">Instagram</a>
+                    <a href="#">Twitter</a>
+                    <a href="#">YouTube</a>
                 </div>
             </div>
             <div class="copyright">
@@ -798,49 +693,75 @@
             });
         });
 
-        // FAQ toggle functionality
-        document.querySelectorAll('.faq-question').forEach(question => {
-            question.addEventListener('click', () => {
-                const item = question.parentElement;
-                item.classList.toggle('active');
-            });
-        });
-
-        // Form submission
-        document.getElementById('admission-form').addEventListener('submit', function(e) {
-            e.preventDefault();
+        // Calendar functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const calendarDays = document.getElementById('calendar-days');
+            const currentMonthElement = document.getElementById('current-month');
+            const prevMonthButton = document.getElementById('prev-month');
+            const nextMonthButton = document.getElementById('next-month');
             
-            // Basic validation
-            const requiredFields = this.querySelectorAll('[required]');
-            let allValid = true;
+            let currentDate = new Date(2025, 8, 1); // September 2025
             
-            requiredFields.forEach(field => {
-                if (!field.value.trim()) {
-                    allValid = false;
-                    field.style.borderColor = 'red';
-                } else {
-                    field.style.borderColor = '';
+            function renderCalendar() {
+                // Clear previous calendar
+                calendarDays.innerHTML = '';
+                
+                // Set month and year
+                const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 
+                                   'July', 'August', 'September', 'October', 'November', 'December'];
+                currentMonthElement.textContent = `${monthNames[currentDate.getMonth()]} ${currentDate.getFullYear()}`;
+                
+                // Get first day of month and number of days
+                const firstDay = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1).getDay();
+                const daysInMonth = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0).getDate();
+                
+                // Add empty cells for days before the first day of the month
+                for (let i = 0; i < firstDay; i++) {
+                    const emptyDay = document.createElement('div');
+                    emptyDay.classList.add('calendar-day');
+                    calendarDays.appendChild(emptyDay);
                 }
+                
+                // Add cells for each day of the month
+                for (let i = 1; i <= daysInMonth; i++) {
+                    const dayElement = document.createElement('div');
+                    dayElement.classList.add('calendar-day');
+                    dayElement.textContent = i;
+                    
+                    // Add sample events (in a real application, this would come from a database)
+                    if (currentDate.getMonth() === 8) { // September
+                        if (i === 5) {
+                            dayElement.classList.add('event');
+                            dayElement.setAttribute('data-event', 'First Day of School');
+                        } else if (i === 15) {
+                            dayElement.classList.add('event');
+                            dayElement.setAttribute('data-event', 'Parent-Teacher Conference');
+                        } else if (i === 22) {
+                            dayElement.classList.add('event');
+                            dayElement.setAttribute('data-event', 'Science Fair');
+                        } else if (i === 30) {
+                            dayElement.classList.add('event');
+                            dayElement.setAttribute('data-event', 'End of Month Tests');
+                        }
+                    }
+                    
+                    calendarDays.appendChild(dayElement);
+                }
+            }
+            
+            // Initial render
+            renderCalendar();
+            
+            // Event listeners for month navigation
+            prevMonthButton.addEventListener('click', () => {
+                currentDate.setMonth(currentDate.getMonth() - 1);
+                renderCalendar();
             });
             
-            if (allValid) {
-                // Show success message
-                document.getElementById('form-success').style.display = 'block';
-                document.getElementById('form-error').style.display = 'none';
-                
-                // In a real application, you would send the form data to a server here
-                console.log('Form submitted successfully');
-                
-                // Reset form after successful submission
-                setTimeout(() => {
-                    this.reset();
-                    document.getElementById('form-success').style.display = 'none';
-                }, 3000);
-            } else {
-                // Show error message
-                document.getElementById('form-error').style.display = 'block';
-                document.getElementById('form-success').style.display = 'none';
-            }
+            nextMonthButton.addEventListener('click', () => {
+                currentDate.setMonth(currentDate.getMonth() + 1);
+                renderCalendar();
+            });
         });
     </script>
 </body>
