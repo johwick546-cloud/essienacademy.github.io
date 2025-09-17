@@ -261,6 +261,28 @@
             margin-top: 20px;
         }
         
+        /* Form Feedback Messages */
+        .form-feedback {
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+            display: none;
+            font-weight: 500;
+        }
+        
+        .form-success {
+            background: rgba(46, 204, 113, 0.2);
+            color: #fff;
+            border: 1px solid rgba(46, 204, 113, 0.5);
+        }
+        
+        .form-error {
+            background: rgba(231, 76, 60, 0.2);
+            color: #fff;
+            border: 1px solid rgba(231, 76, 60, 0.5);
+        }
+        
         /* Map Section */
         .map {
             padding: 50px;
@@ -535,26 +557,29 @@
         <div class="contact-form glass-effect">
             <h3>Send Us a Message</h3>
             <div class="form-container">
-                <form id="contact-form">
+                <form id="contact-form" action="https://formspree.io/f/xgvljrjo" method="POST">
+                    <input type="hidden" name="_subject" value="New Contact Form Submission from Essien's Excellence Academy">
+                    <input type="hidden" name="_replyto" value="%email">
+                    
                     <div class="form-row">
                         <div class="form-group">
-                            <label for="name">Your Name</label>
-                            <input type="text" id="name" class="form-control" required>
+                            <label for="name">Your Name *</label>
+                            <input type="text" id="name" name="name" class="form-control" required>
                         </div>
                         <div class="form-group">
-                            <label for="email">Email Address</label>
-                            <input type="email" id="email" class="form-control" required>
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" name="email" class="form-control" required>
                         </div>
                     </div>
                     
                     <div class="form-row">
                         <div class="form-group">
                             <label for="phone">Phone Number</label>
-                            <input type="tel" id="phone" class="form-control">
+                            <input type="tel" id="phone" name="phone" class="form-control">
                         </div>
                         <div class="form-group">
-                            <label for="subject">Subject</label>
-                            <select id="subject" class="form-control" required>
+                            <label for="subject">Subject *</label>
+                            <select id="subject" name="subject" class="form-control" required>
                                 <option value="">Select Subject</option>
                                 <option value="admissions">Admissions Inquiry</option>
                                 <option value="academics">Academic Programs</option>
@@ -566,8 +591,17 @@
                     </div>
                     
                     <div class="form-group">
-                        <label for="message">Your Message</label>
-                        <textarea id="message" class="form-control" required></textarea>
+                        <label for="message">Your Message *</label>
+                        <textarea id="message" name="message" class="form-control" required></textarea>
+                    </div>
+                    
+                    <!-- Form feedback messages -->
+                    <div id="form-success" class="form-feedback form-success">
+                        Thank you for your message! We will respond within 24 hours.
+                    </div>
+                    
+                    <div id="form-error" class="form-feedback form-error">
+                        Please fill in all required fields.
                     </div>
                     
                     <div class="btn-center">
@@ -677,11 +711,56 @@
             });
         });
 
-        // Form submission
-        document.getElementById('contact-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('Thank you for your message! We will respond within 24 hours.');
-            this.reset();
+        // Form submission and validation
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('contact-form');
+            const formSuccess = document.getElementById('form-success');
+            const formError = document.getElementById('form-error');
+            
+            form.addEventListener('submit', function(event) {
+                // Simple validation
+                const requiredFields = form.querySelectorAll('[required]');
+                let valid = true;
+                
+                requiredFields.forEach(field => {
+                    if (!field.value.trim()) {
+                        valid = false;
+                        field.style.border = '2px solid #e74c3c';
+                    } else {
+                        field.style.border = '';
+                    }
+                });
+                
+                if (!valid) {
+                    event.preventDefault();
+                    formError.style.display = 'block';
+                    formSuccess.style.display = 'none';
+                    
+                    // Scroll to error message
+                    formError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                } else {
+                    formError.style.display = 'none';
+                    
+                    // In a real implementation, Formspree would handle the submission
+                    // This is just for demonstration purposes
+                    formSuccess.style.display = 'block';
+                    
+                    // Scroll to success message
+                    formSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    
+                    // For real usage, you would let the form submit to Formspree
+                    // The form will submit to Formspree automatically with the action attribute
+                }
+            });
+            
+            // Clear error styles when user starts typing
+            const inputs = form.querySelectorAll('input, textarea, select');
+            inputs.forEach(input => {
+                input.addEventListener('input', function() {
+                    this.style.border = '';
+                    formError.style.display = 'none';
+                });
+            });
         });
     </script>
 </body>
