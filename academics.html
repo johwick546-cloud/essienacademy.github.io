@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Academics - Essien's Excellence Academy</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             --primary: #000000;
@@ -297,24 +298,32 @@
         }
         
         .calendar-container {
-            max-width: 800px;
+            max-width: 1000px;
             margin: 0 auto;
         }
         
         .calendar-grid {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
-            gap: 5px;
+            gap: 8px;
             text-align: center;
         }
         
         .calendar-day {
-            padding: 10px 5px;
+            padding: 12px 5px;
             border-radius: 8px;
-            min-height: 50px;
+            min-height: 80px;
             display: flex;
+            flex-direction: column;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start;
+            background: rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .calendar-day:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-3px);
         }
         
         .calendar-header {
@@ -323,51 +332,120 @@
             padding: 15px 5px;
         }
         
-        .empty-day {
-            background: transparent;
+        .day-number {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 5px;
         }
         
         .event {
-            background: linear-gradient(45deg, var(--accent), var(--accent2));
-            color: white;
-            cursor: pointer;
-            position: relative;
+            font-size: 0.75rem;
+            padding: 3px 6px;
+            border-radius: 4px;
+            margin-top: 4px;
+            width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
         }
         
-        .event:hover::after {
-            content: attr(data-event);
-            position: absolute;
-            bottom: 100%;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--primary);
-            color: var(--secondary);
-            padding: 5px 10px;
-            border-radius: 5px;
-            font-size: 0.8rem;
-            white-space: nowrap;
-            z-index: 10;
+        .event.holiday {
+            background: rgba(255, 140, 0, 0.3);
+            border-left: 3px solid #FF8C00;
+        }
+        
+        .event.exam {
+            background: rgba(220, 20, 60, 0.3);
+            border-left: 3px solid #DC143C;
+        }
+        
+        .event.seminar {
+            background: rgba(50, 205, 50, 0.3);
+            border-left: 3px solid #32CD32;
+        }
+        
+        .event.sports {
+            background: rgba(65, 105, 225, 0.3);
+            border-left: 3px solid #4169E1;
+        }
+        
+        .event.cultural {
+            background: rgba(138, 43, 226, 0.3);
+            border-left: 3px solid #8A2BE2;
+        }
+        
+        .empty-day {
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 8px;
         }
         
         .month-nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
         
         .month-nav button {
             background: var(--glass);
             border: var(--border);
             color: var(--secondary);
-            padding: 8px 15px;
+            padding: 10px 20px;
             border-radius: 20px;
             cursor: pointer;
             transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
         
         .month-nav button:hover {
             background: var(--accent);
+        }
+        
+        .current-month {
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+        
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 30px;
+            justify-content: center;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .color-box {
+            width: 15px;
+            height: 15px;
+            border-radius: 3px;
+        }
+        
+        .holiday-color {
+            background: #FF8C00;
+        }
+        
+        .exam-color {
+            background: #DC143C;
+        }
+        
+        .seminar-color {
+            background: #32CD32;
+        }
+        
+        .sports-color {
+            background: #4169E1;
+        }
+        
+        .cultural-color {
+            background: #8A2BE2;
         }
         
         /* Footer */
@@ -432,18 +510,53 @@
                 grid-template-columns: 1fr;
             }
             
-            .calendar-grid {
-                gap: 3px;
+            .calendar-day {
+                padding: 8px 3px;
+                min-height: 70px;
+                font-size: 0.9rem;
             }
             
+            .day-number {
+                font-size: 1rem;
+            }
+            
+            .event {
+                font-size: 0.65rem;
+                padding: 2px 4px;
+            }
+            
+            .current-month {
+                font-size: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
             .calendar-day {
                 padding: 5px 2px;
-                font-size: 0.8rem;
-                min-height: 35px;
+                min-height: 60px;
             }
             
             .calendar-header {
                 padding: 10px 2px;
+                font-size: 0.9rem;
+            }
+            
+            .day-number {
+                font-size: 0.9rem;
+            }
+            
+            .event {
+                display: none;
+            }
+            
+            .month-nav {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .month-nav button {
+                width: 100%;
+                justify-content: center;
             }
         }
         
@@ -645,9 +758,13 @@
             <h3>Academic Calendar</h3>
             <div class="calendar-container">
                 <div class="month-nav">
-                    <button id="prev-month">← Previous</button>
-                    <h4 id="current-month">September 2025</h4>
-                    <button id="next-month">Next →</button>
+                    <button id="prev-month">
+                        <i class="fas fa-chevron-left"></i> Previous Month
+                    </button>
+                    <h3 class="current-month" id="current-month">September 2023</h3>
+                    <button id="next-month">
+                        Next Month <i class="fas fa-chevron-right"></i>
+                    </button>
                 </div>
                 <div class="calendar-grid">
                     <div class="calendar-day calendar-header">Sun</div>
@@ -659,7 +776,29 @@
                     <div class="calendar-day calendar-header">Sat</div>
                     
                     <!-- Calendar days will be populated by JavaScript -->
-                    <div id="calendar-days"></div>
+                </div>
+                
+                <div class="legend">
+                    <div class="legend-item">
+                        <div class="color-box holiday-color"></div>
+                        <span>Holidays</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="color-box exam-color"></div>
+                        <span>Exams</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="color-box seminar-color"></div>
+                        <span>Seminars & Workshops</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="color-box sports-color"></div>
+                        <span>Sports Events</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="color-box cultural-color"></div>
+                        <span>Cultural Events</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -714,72 +853,114 @@
 
         // Calendar functionality
         document.addEventListener('DOMContentLoaded', function() {
-            const calendarDays = document.getElementById('calendar-days');
+            const calendarGrid = document.querySelector('.calendar-grid');
             const currentMonthElement = document.getElementById('current-month');
             const prevMonthButton = document.getElementById('prev-month');
             const nextMonthButton = document.getElementById('next-month');
             
-            let currentDate = new Date(2025, 8, 1); // September 2025
+            let currentDate = new Date();
+            let currentMonth = currentDate.getMonth();
+            let currentYear = currentDate.getFullYear();
             
-            function renderCalendar() {
-                // Clear previous calendar
-                calendarDays.innerHTML = '';
-                
-                // Set month and year
-                const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 
-                                   'July', 'August', 'September', 'October', 'November', 'December'];
-                currentMonthElement.textContent = `${monthNames[currentDate.getMonth()]} ${currentDate.getFullYear()}`;
-                
-                // Get first day of month and number of days
-                const firstDay = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1).getDay();
-                const daysInMonth = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0).getDate();
-                
-                // Add empty cells for days before the first day of the month
-                for (let i = 0; i < firstDay; i++) {
-                    const emptyDay = document.createElement('div');
-                    emptyDay.classList.add('calendar-day', 'empty-day');
-                    calendarDays.appendChild(emptyDay);
+            // Academic events data (sample data for demonstration)
+            const academicEvents = {
+                '9-4-2023': [{ type: 'seminar', title: 'Orientation Day' }],
+                '9-5-2023': [{ type: 'seminar', title: 'Parent-Teacher Meeting' }],
+                '9-15-2023': [{ type: 'holiday', title: 'Founder\'s Day' }],
+                '9-22-2023': [{ type: 'sports', title: 'Sports Day' }],
+                '10-2-2023': [{ type: 'holiday', title: 'National Holiday' }],
+                '10-15-2023': [{ type: 'cultural', title: 'Cultural Festival' }],
+                '10-20-2023': [{ type: 'exam', title: 'Mid-Term Exams Begin' }],
+                '10-25-2023': [{ type: 'exam', title: 'Mid-Term Exams End' }],
+                '11-1-2023': [{ type: 'seminar', title: 'Career Guidance Workshop' }],
+                '11-11-2023': [{ type: 'holiday', title: 'Veterans Day' }],
+                '11-23-2023': [{ type: 'holiday', title: 'Thanksgiving Break' }],
+                '11-24-2023': [{ type: 'holiday', title: 'Thanksgiving Break' }],
+                '12-15-2023': [{ type: 'exam', title: 'Final Exams Begin' }],
+                '12-20-2023': [{ type: 'exam', title: 'Final Exams End' }],
+                '12-22-2023': [{ type: 'holiday', title: 'Winter Break Begins' }]
+            };
+            
+            // Month names
+            const monthNames = [
+                'January', 'February', 'March', 'April', 'May', 'June',
+                'July', 'August', 'September', 'October', 'November', 'December'
+            ];
+            
+            // Function to generate the calendar
+            function generateCalendar(month, year) {
+                // Clear existing days (keeping headers)
+                while (calendarGrid.children.length > 7) {
+                    calendarGrid.removeChild(calendarGrid.lastChild);
                 }
                 
-                // Add cells for each day of the month
-                for (let i = 1; i <= daysInMonth; i++) {
+                // Update current month display
+                currentMonthElement.textContent = `${monthNames[month]} ${year}`;
+                
+                // Get first day of month and number of days in month
+                const firstDay = new Date(year, month, 1).getDay();
+                const daysInMonth = new Date(year, month + 1, 0).getDate();
+                
+                // Create empty placeholder days
+                for (let i = 0; i < firstDay; i++) {
+                    const emptyDay = document.createElement('div');
+                    emptyDay.classList.add('empty-day');
+                    calendarGrid.appendChild(emptyDay);
+                }
+                
+                // Create days
+                for (let day = 1; day <= daysInMonth; day++) {
                     const dayElement = document.createElement('div');
                     dayElement.classList.add('calendar-day');
-                    dayElement.textContent = i;
                     
-                    // Add sample events (in a real application, this would come from a database)
-                    if (currentDate.getMonth() === 8) { // September
-                        if (i === 5) {
-                            dayElement.classList.add('event');
-                            dayElement.setAttribute('data-event', 'First Day of School');
-                        } else if (i === 15) {
-                            dayElement.classList.add('event');
-                            dayElement.setAttribute('data-event', 'Parent-Teacher Conference');
-                        } else if (i === 22) {
-                            dayElement.classList.add('event');
-                            dayElement.setAttribute('data-event', 'Science Fair');
-                        } else if (i === 30) {
-                            dayElement.classList.add('event');
-                            dayElement.setAttribute('data-event', 'End of Month Tests');
-                        }
+                    const dayNumber = document.createElement('div');
+                    dayNumber.classList.add('day-number');
+                    dayNumber.textContent = day;
+                    
+                    dayElement.appendChild(dayNumber);
+                    
+                    // Check if this day has events
+                    const dateKey = `${month + 1}-${day}-${year}`;
+                    if (academicEvents[dateKey]) {
+                        academicEvents[dateKey].forEach(event => {
+                            const eventElement = document.createElement('div');
+                            eventElement.classList.add('event', event.type);
+                            eventElement.textContent = event.title;
+                            dayElement.appendChild(eventElement);
+                        });
                     }
                     
-                    calendarDays.appendChild(dayElement);
+                    // Highlight current day
+                    if (day === currentDate.getDate() && month === currentDate.getMonth() && year === currentDate.getFullYear()) {
+                        dayElement.style.background = 'rgba(30, 144, 255, 0.3)';
+                        dayElement.style.boxShadow = '0 0 10px rgba(30, 144, 255, 0.5)';
+                    }
+                    
+                    calendarGrid.appendChild(dayElement);
                 }
             }
             
-            // Initial render
-            renderCalendar();
+            // Initial calendar generation
+            generateCalendar(currentMonth, currentYear);
             
-            // Event listeners for month navigation
-            prevMonthButton.addEventListener('click', () => {
-                currentDate.setMonth(currentDate.getMonth() - 1);
-                renderCalendar();
+            // Previous month button event
+            prevMonthButton.addEventListener('click', function() {
+                currentMonth--;
+                if (currentMonth < 0) {
+                    currentMonth = 11;
+                    currentYear--;
+                }
+                generateCalendar(currentMonth, currentYear);
             });
             
-            nextMonthButton.addEventListener('click', () => {
-                currentDate.setMonth(currentDate.getMonth() + 1);
-                renderCalendar();
+            // Next month button event
+            nextMonthButton.addEventListener('click', function() {
+                currentMonth++;
+                if (currentMonth > 11) {
+                    currentMonth = 0;
+                    currentYear++;
+                }
+                generateCalendar(currentMonth, currentYear);
             });
         });
     </script>
