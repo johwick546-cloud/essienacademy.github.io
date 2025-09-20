@@ -107,6 +107,24 @@
             color: var(--accent);
             background: var(--glass-dark);
         }
+
+        /* Mobile Navigation */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: space-around;
+            width: 30px;
+            height: 25px;
+            cursor: pointer;
+        }
+
+        .menu-toggle span {
+            width: 100%;
+            height: 3px;
+            background-color: var(--secondary);
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
         
         /* Page Title */
         .page-title {
@@ -341,50 +359,6 @@
             border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
         
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .header-content {
-                flex-direction: column;
-            }
-            
-            nav ul {
-                margin-top: 20px;
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-            
-            nav ul li {
-                margin: 5px 10px;
-            }
-            
-            .page-title h2 {
-                font-size: 2.5rem;
-            }
-            
-            .timeline::after {
-                left: 31px;
-            }
-            
-            .timeline-item {
-                width: 100%;
-                padding-left: 70px;
-                padding-right: 25px;
-            }
-            
-            .timeline-item:nth-child(even) {
-                left: 0;
-            }
-            
-            .timeline-item:nth-child(odd) .timeline-content {
-                text-align: left;
-            }
-            
-            .timeline-item:nth-child(odd)::after, 
-            .timeline-item:nth-child(even)::after {
-                left: 21px;
-            }
-        }
-        
         /* Interactive Background */
         .background-animation {
             position: fixed;
@@ -416,6 +390,241 @@
                 transform: translate(0, 0) rotate(360deg);
             }
         }
+
+        /* =========================== */
+        /* RESPONSIVE MEDIA QUERIES */
+        /* =========================== */
+        
+        /* Tablet (768px–1023px) */
+        @media (max-width: 1023px) {
+            .page-title h2 {
+                font-size: 2.5rem;
+            }
+            
+            .mission, .history, .staff {
+                padding: 40px;
+            }
+            
+            .mission-content h3, .history h3, .staff h3 {
+                font-size: 1.8rem;
+            }
+            
+            .quote {
+                padding: 15px;
+            }
+            
+            .footer-content {
+                gap: 20px;
+            }
+        }
+        
+        /* Mobile (≤767px) */
+        @media (max-width: 767px) {
+            /* Header and Navigation */
+            .header-content {
+                flex-direction: column;
+                padding: 15px;
+            }
+            
+            .logo h1 {
+                font-size: 1.5rem;
+                margin-left: 10px;
+            }
+            
+            nav {
+                width: 100%;
+                margin-top: 15px;
+                display: none;
+            }
+            
+            nav.active {
+                display: block;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav ul li {
+                margin: 8px 0;
+                width: 100%;
+                text-align: center;
+            }
+            
+            nav ul li a {
+                display: block;
+                padding: 12px;
+                border-radius: 8px;
+            }
+            
+            .menu-toggle {
+                display: flex;
+                position: absolute;
+                top: 30px;
+                right: 20px;
+            }
+            
+            /* Page Title */
+            .page-title {
+                padding: 50px 0 20px;
+            }
+            
+            .page-title h2 {
+                font-size: 2rem;
+            }
+            
+            .page-title p {
+                font-size: 1.1rem;
+                padding: 0 15px;
+            }
+            
+            /* Mission Section */
+            .mission {
+                padding: 30px 20px;
+                margin: 30px 0;
+            }
+            
+            .mission-content h3 {
+                font-size: 1.6rem;
+                margin-bottom: 20px;
+            }
+            
+            .mission-content p {
+                font-size: 1rem;
+                line-height: 1.6;
+            }
+            
+            .quote {
+                padding: 15px;
+                margin: 20px 0;
+                font-size: 0.95rem;
+            }
+            
+            /* History Section */
+            .history {
+                padding: 30px 20px;
+                margin: 30px 0;
+            }
+            
+            .history h3 {
+                font-size: 1.6rem;
+                margin-bottom: 30px;
+            }
+            
+            .timeline::after {
+                left: 31px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+            
+            .timeline-item:nth-child(even) {
+                left: 0;
+            }
+            
+            .timeline-item:nth-child(odd) .timeline-content {
+                text-align: left;
+            }
+            
+            .timeline-item:nth-child(odd)::after, 
+            .timeline-item:nth-child(even)::after {
+                left: 21px;
+            }
+            
+            .timeline-content {
+                padding: 15px;
+            }
+            
+            .timeline-content h4 {
+                font-size: 1.1rem;
+            }
+            
+            /* Staff Section */
+            .staff {
+                padding: 30px 20px;
+                margin: 30px 0;
+            }
+            
+            .staff h3 {
+                font-size: 1.6rem;
+                margin-bottom: 30px;
+            }
+            
+            .staff-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .staff-member {
+                padding: 20px;
+            }
+            
+            .staff-img {
+                width: 100px;
+                height: 100px;
+                font-size: 2rem;
+            }
+            
+            .staff-member h4 {
+                font-size: 1.2rem;
+            }
+            
+            /* Footer */
+            footer {
+                padding: 30px 0;
+                margin-top: 40px;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 25px;
+                text-align: center;
+            }
+            
+            .footer-section h3 {
+                font-size: 1.2rem;
+            }
+            
+            .copyright {
+                margin-top: 30px;
+            }
+            
+            /* Container padding adjustment */
+            .container {
+                padding: 0 15px;
+            }
+        }
+        
+        /* Small Mobile (≤480px) */
+        @media (max-width: 480px) {
+            .page-title h2 {
+                font-size: 1.8rem;
+            }
+            
+            .logo h1 {
+                font-size: 1.3rem;
+            }
+            
+            .logo-placeholder {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+            
+            .mission-content h3, .history h3, .staff h3 {
+                font-size: 1.4rem;
+            }
+            
+            .staff-img {
+                width: 80px;
+                height: 80px;
+                font-size: 1.8rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -434,7 +643,12 @@
                     <div class="logo-placeholder">EEA</div>
                     <h1>Essien's Excellence Academy</h1>
                 </div>
-                <nav>
+                <div class="menu-toggle" id="mobile-menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <nav id="main-nav">
                     <ul>
                         <li><a href="index.html">Home</a></li>
                         <li><a href="about.html" style="color: var(--accent); background: var(--glass-dark);">About</a></li>
@@ -589,6 +803,15 @@
                 
                 circle.style.transform = `translate(${xOffset}px, ${yOffset}px)`;
             });
+        });
+
+        // Mobile menu toggle
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mainNav = document.getElementById('main-nav');
+        
+        mobileMenu.addEventListener('click', function() {
+            mainNav.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
         });
     </script>
 </body>
