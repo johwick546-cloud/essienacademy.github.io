@@ -307,28 +307,17 @@
         }
         
         .map-container {
-            height: 400px;
+            height: 450px;
             border-radius: 12px;
             overflow: hidden;
             position: relative;
         }
         
-        .map-placeholder {
+        .map-container iframe {
             width: 100%;
             height: 100%;
-            background: linear-gradient(45deg, #2c3e50, #4ca1af);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            text-align: center;
-        }
-        
-        .map-placeholder i {
-            font-size: 4rem;
-            margin-bottom: 20px;
-            color: var(--accent);
+            border: none;
+            border-radius: 12px;
         }
         
         /* Staff Contacts */
@@ -489,7 +478,7 @@
             }
             
             .map-container {
-                height: 350px;
+                height: 400px;
             }
             
             .footer-content {
@@ -629,11 +618,7 @@
             }
             
             .map-container {
-                height: 300px;
-            }
-            
-            .map-placeholder i {
-                font-size: 3rem;
+                height: 350px;
             }
             
             /* Staff Contacts */
@@ -711,11 +696,7 @@
             }
             
             .map-container {
-                height: 250px;
-            }
-            
-            .map-placeholder i {
-                font-size: 2.5rem;
+                height: 300px;
             }
             
             .staff-img {
@@ -841,7 +822,7 @@
                     
                     <div class="form-group">
                         <label for="message">Your Message *</label>
-                        <textarea id="message" name"message" class="form-control" required></textarea>
+                        <textarea id="message" name="message" class="form-control" required></textarea>
                     </div>
                     
                     <!-- Form feedback messages -->
@@ -866,12 +847,7 @@
         <div class="map glass-effect">
             <h3>Our Location</h3>
             <div class="map-container">
-                <div class="map-placeholder">
-                    <div style="font-size: 4rem;">📍</div>
-                    <h4>Interactive Map</h4>
-                    <p>Education Street, Academic City, Ghana</p>
-                    <p>(Map would be integrated here in a live environment)</p>
-                </div>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3276.5946754876077!2d-1.817776626033691!3d4.873403040138318!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xfe777e4ee9c7fc3%3A0x1a0837e7114b09d7!2sEssien%20Center%20for%20Academic%20Excellence!5e1!3m2!1sen!2sgh!4v1758491409844!5m2!1sen!2sgh" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
         </div>
     </section>
