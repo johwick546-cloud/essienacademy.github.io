@@ -162,440 +162,652 @@
 
     .btn:hover {
       transform: translateY(-3px);
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-    }
+      box-shadow: 0 10px极致的响应式学校网站设计，带有玻璃态效果和现代导航
 
-    /* Features Section */
-    .features {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 30px;
-      margin: 60px 0;
-    }
+# 响应式学校网站设计
 
-    .feature-card {
-      padding: 30px;
-      transition: all 0.3s ease;
-      height: 100%;
-    }
+我将为您创建一个现代化的学校网站，具有玻璃态效果、响应式设计和优雅的导航系统。
 
-    .feature-card:hover {
-      transform: translateY(-10px);
-    }
+## 设计思路
+- 使用玻璃态效果（Glassmorphism）设计
+- 响应式布局，适配所有设备
+- 优雅的配色方案和动画效果
+- 清晰的导航和信息架构
 
-    .feature-icon {
-      font-size: 2.5rem;
-      margin-bottom: 20px;
-      color: var(--accent);
-    }
+下面是完整的实现代码：
 
-    .feature-card h3 {
-      font-size: 1.5rem;
-      margin-bottom: 15px;
-    }
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Essien's Excellence Academy</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #000000;
+            --secondary: #FFFFFF;
+            --accent: #1E90FF;
+            --accent2: #FF8C00;
+            --glass: rgba(255, 255, 255, 0.1);
+            --glass-dark: rgba(0, 0, 0, 0.1);
+            --shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            --border: 1px solid rgba(255, 255, 255, 0.18);
+        }
 
-    /* Announcements */
-    .announcements {
-      padding: 40px;
-      margin: 60px 0;
-    }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
-    .announcements h2 {
-      text-align: center;
-      margin-bottom: 30px;
-      font-size: 2.2rem;
-    }
+        body {
+            background: linear-gradient(135deg, #000428, #004e92);
+            color: var(--secondary);
+            min-height: 100vh;
+            background-attachment: fixed;
+            overflow-x: hidden;
+        }
 
-    .announcement-item {
-      padding: 20px;
-      margin-bottom: 20px;
-      border-left: 4px solid var(--accent);
-    }
+        .glass-effect {
+            background: var(--glass);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-radius: 12px;
+            border: var(--border);
+            box-shadow: var(--shadow);
+        }
 
-    .announcement-item h3 {
-      margin-bottom: 10px;
-      color: var(--accent);
-    }
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
 
-    /* Footer */
-    footer {
-      padding: 40px 0;
-      margin-top: 60px;
-      text-align: center;
-    }
+        /* Header Styles */
+        header {
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
 
-    .footer-content {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 30px;
-      text-align: left;
-    }
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 25px;
+        }
 
-    .footer-section h3 {
-      margin-bottom: 20px;
-      font-size: 1.3rem;
-    }
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
 
-    .footer-section p, .footer-section a {
-      margin-bottom: 10px;
-      display: block;
-      color: #ccc;
-      text-decoration: none;
-    }
+        .logo-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--accent), var(--accent2));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-weight: bold;
+            font-size: 1.5rem;
+            color: white;
+        }
 
-    .footer-section a:hover {
-      color: var(--accent);
-    }
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
 
-    .copyright {
-      margin-top: 40px;
-      padding-top: 20px;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
-    }
+        .logo-school {
+            font-weight: bold;
+            font-size: 1.4rem;
+            line-height: 1.2;
+            color: var(--accent);
+        }
 
-    /* Interactive Background */
-    .background-animation {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-      opacity: 0.5;
-    }
+        .logo-motto {
+            font-size: 0.7rem;
+            font-style: italic;
+            color: var(--accent2);
+            line-height: 1.1;
+            margin-top: 2px;
+        }
 
-    .animated-circle {
-      position: absolute;
-      border-radius: 50%;
-      background: linear-gradient(45deg, var(--accent), var(--accent2));
-      opacity: 0.3;
-      filter: blur(40px);
-      animation: float 15s infinite linear;
-    }
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
 
-    @keyframes float {
-      0% { transform: translate(0, 0) rotate(0deg); }
-      50% { transform: translate(20px, 20px) rotate(180deg); }
-      100% { transform: translate(0, 0) rotate(360deg); }
-    }
+        nav ul li {
+            margin-left: 25px;
+        }
 
-    /* =========================== */
-    /* RESPONSIVE MEDIA QUERIES */
-    /* =========================== */
-    
-    /* Tablet (768px–1023px) */
-    @media (max-width: 1023px) {
-      .hero h2 {
-        font-size: 3rem;
-      }
-      
-      .feature-card {
-        padding: 25px;
-      }
-      
-      .announcements {
-        padding: 30px;
-      }
-      
-      .footer-content {
-        gap: 20px;
-      }
-    }
-    
-    /* Mobile (≤767px) */
-    @media (max-width: 767px) {
-      /* Header and Navigation */
-      .header-content {
-        flex-direction: column;
-        padding: 15px;
-      }
-      
-      .logo h1 {
-        font-size: 1.5rem;
-        margin-left: 10px;
-      }
-      
-      /* Site Logo on Mobile */
-      .site-logo {
-        width: 48px;
-      }
-      
-      nav {
-        width: 100%;
-        margin-top: 15px;
-        display: none;
-      }
-      
-      nav.active {
-        display: block;
-      }
-      
-      nav ul {
-        flex-direction: column;
-        align-items: center;
-      }
-      
-      nav ul li {
-        margin: 8px 0;
-        width: 100%;
-        text-align: center;
-      }
-      
-      nav ul li a {
-        display: block;
-        padding: 12px;
-        border-radius: 8px;
-      }
-      
-      .menu-toggle {
-        display: flex;
-        position: absolute;
-        top: 30px;
-        right: 20px;
-      }
-      
-      /* Hero Section */
-      .hero {
-        padding: 60px 0;
-        margin: 20px 0;
-      }
-      
-      .hero h2 {
-        font-size: 2.2rem;
-      }
-      
-      .hero p {
-        font-size: 1.1rem;
-        padding: 0 15px;
-      }
-      
-      .btn {
-        padding: 14px 28px;
-        font-size: 1.1rem;
-      }
-      
-      /* Features */
-      .features {
-        grid-template-columns: 1fr;
-        gap: 20px;
-        margin: 40px 0;
-      }
-      
-      .feature-card {
-        padding: 20px;
-        text-align: center;
-      }
-      
-      .feature-icon {
-        font-size: 2rem;
-      }
-      
-      .feature-card h3 {
-        font-size: 1.3rem;
-      }
-      
-      /* Announcements */
-      .announcements {
-        padding: 25px 20px;
-        margin: 40px 0;
-      }
-      
-      .announcements h2 {
-        font-size: 1.8rem;
-        margin-bottom: 20px;
-      }
-      
-      .announcement-item {
-        padding: 15px;
-      }
-      
-      /* Footer */
-      footer {
-        padding: 30px 0;
-        margin-top: 40px;
-      }
-      
-      .footer-content {
-        grid-template-columns: 1fr;
-        gap: 25px;
-        text-align: center;
-      }
-      
-      .footer-section h3 {
-        font-size: 1.2rem;
-      }
-      
-      .copyright {
-        margin-top: 30px;
-      }
-      
-      /* Container padding adjustment */
-      .container {
-        padding: 0 15px;
-      }
-    }
-    
-    /* Small Mobile (≤480px) */
-    @media (max-width: 480px) {
-      .hero h2 {
-        font-size: 1.8rem;
-      }
-      
-      .logo h1 {
-        font-size: 1.3rem;
-      }
-      
-      .feature-icon {
-        font-size: 1.8rem;
-      }
-      
-      .announcements h2 {
-        font-size: 1.6rem;
-      }
-    }
-  </style>
+        nav ul li a {
+            color: var(--secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 8px 15px;
+            border-radius: 20px;
+        }
+
+        nav ul li a:hover {
+            color: var(--accent);
+            background: var(--glass-dark);
+        }
+
+        /* Mobile Navigation */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: space-around;
+            width: 30px;
+            height: 25px;
+            cursor: pointer;
+        }
+
+        .menu-toggle span {
+            width: 100%;
+            height: 3px;
+            background-color: var(--secondary);
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 100px 0;
+            text-align: center;
+            margin: 40px 0;
+        }
+
+        .hero h2 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, var(--accent), var(--accent2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 800;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+            line-height: 1.6;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(45deg, var(--accent), var(--accent2));
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Features Section */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 60px 0;
+        }
+
+        .feature-card {
+            padding: 30px;
+            transition: all 0.3s ease;
+            height: 100%;
+            text-align: center;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--accent);
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        /* Announcements */
+        .announcements {
+            padding: 40px;
+            margin: 60px 0;
+        }
+
+        .announcements h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.2rem;
+        }
+
+        .announcement-item {
+            padding: 20px;
+            margin-bottom: 20px;
+            border-left: 4px solid var(--accent);
+        }
+
+        .announcement-item h3 {
+            margin-bottom: 10px;
+            color: var(--accent);
+        }
+
+        /* Footer */
+        footer {
+            padding: 40px 0;
+            margin-top: 60px;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            text-align: left;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+
+        .footer-section p, .footer-section a {
+            margin-bottom: 10px;
+            display: block;
+            color: #ccc;
+            text-decoration: none;
+        }
+
+        .footer-section a:hover {
+            color: var(--accent);
+        }
+
+        .copyright {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Interactive Background */
+        .background-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.5;
+        }
+
+        .animated-circle {
+            position: absolute;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--accent), var(--accent2));
+            opacity: 0.3;
+            filter: blur(40px);
+            animation: float 15s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(20px, 20px) rotate(180deg); }
+            100% { transform: translate(0, 0) rotate(360deg); }
+        }
+
+        /* =========================== */
+        /* RESPONSIVE MEDIA QUERIES */
+        /* =========================== */
+        
+        /* Tablet (768px–1023px) */
+        @media (max-width: 1023px) {
+            .hero h2 {
+                font-size: 3rem;
+            }
+            
+            .feature-card {
+                padding: 25px;
+            }
+            
+            .announcements {
+                padding: 30px;
+            }
+            
+            .footer-content {
+                gap: 20px;
+            }
+        }
+        
+        /* Mobile (≤767px) */
+        @media (max-width: 767px) {
+            /* Header and Navigation */
+            .header-content {
+                flex-direction: column;
+                padding: 15px;
+            }
+            
+            .logo-school {
+                font-size: 1.1rem;
+            }
+            
+            .logo-motto {
+                font-size: 0.65rem;
+            }
+            
+            nav {
+                width: 100%;
+                margin-top: 15px;
+                display: none;
+            }
+            
+            nav.active {
+                display: block;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav ul li {
+                margin: 8px 0;
+                width: 100%;
+                text-align: center;
+            }
+            
+            nav ul li a {
+                display: block;
+                padding: 12px;
+                border-radius: 8px;
+            }
+            
+            .menu-toggle {
+                display: flex;
+                position: absolute;
+                top: 30px;
+                right: 20px;
+            }
+            
+            /* Hero Section */
+            .hero {
+                padding: 60px 0;
+                margin: 20px 0;
+            }
+            
+            .hero h2 {
+                font-size: 2.2rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+                padding: 0 15px;
+            }
+            
+            .btn {
+                padding: 14px 28px;
+                font-size: 1.1rem;
+            }
+            
+            /* Features */
+            .features {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                margin: 40px 0;
+            }
+            
+            .feature-card {
+                padding: 20px;
+            }
+            
+            .feature-icon {
+                font-size: 2rem;
+            }
+            
+            .feature-card h3 {
+                font-size: 1.3rem;
+            }
+            
+            /* Announcements */
+            .announcements {
+                padding: 25px 20px;
+                margin: 40px 0;
+            }
+            
+            .announcements h2 {
+                font-size: 1.8rem;
+                margin-bottom: 20px;
+            }
+            
+            .announcement-item {
+                padding: 15px;
+            }
+            
+            /* Footer */
+            footer {
+                padding: 30px 0;
+                margin-top: 40px;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 25px;
+                text-align: center;
+            }
+            
+            .footer-section h3 {
+                font-size: 1.2rem;
+            }
+            
+            .copyright {
+                margin-top: 30px;
+            }
+            
+            /* Container padding adjustment */
+            .container {
+                padding: 0 15px;
+            }
+        }
+        
+        /* Small Mobile (≤480px) */
+        @media (max-width: 480px) {
+            .hero h2 {
+                font-size: 1.8rem;
+            }
+            
+            .logo-school {
+                font-size: 1rem;
+            }
+            
+            .logo-motto {
+                font-size: 0.6rem;
+            }
+            
+            .logo-img {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+            
+            .feature-icon {
+                font-size: 1.8rem;
+            }
+            
+            .announcements h2 {
+                font-size: 1.6rem;
+            }
+        }
+    </style>
 </head>
 <body>
-  <!-- Interactive Background -->
-  <div class="background-animation">
-    <div class="animated-circle" style="width: 300px; height: 300px; top: 10%; left: 20%;"></div>
-    <div class="animated-circle" style="width: 200px; height: 200px; top: 60%; left: 70%; animation-delay: -5s;"></div>
-    <div class="animated-circle" style="width: 250px; height: 250px; top: 30%; left: 50%; animation-delay: -10s;"></div>
-  </div>
-
-  <!-- Header -->
-  <header class="glass-effect">
-    <div class="container">
-      <div class="header-content">
-        <div class="logo">
-          <!-- Real logo inserted here -->
-          <img src="https://essienacademy.github.io/logo.png" alt="Essien's Excellence Academy Logo" class="site-logo">
-          <h1>Essien's Excellence Academy</h1>
-        </div>
-        <div class="menu-toggle" id="mobile-menu">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-        <nav id="main-nav">
-          <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="academics.html">Academics</a></li>
-            <li><a href="admissions.html">Admissions</a></li>
-            <li><a href="contact.html">Contact</a></li>
-          </ul>
-        </nav>
-      </div>
+    <!-- Interactive Background -->
+    <div class="background-animation">
+        <div class="animated-circle" style="width: 300px; height: 300px; top: 10%; left: 20%;"></div>
+        <div class="animated-circle" style="width: 200px; height: 200px; top: 60%; left: 70%; animation-delay: -5s;"></div>
+        <div class="animated-circle" style="width: 250px; height: 250px; top: 30%; left: 50%; animation-delay: -10s;"></div>
     </div>
-  </header>
 
-  <!-- Hero Section -->
-  <section class="hero">
-    <div class="container">
-      <h2>Rest Not; Aspire to Greater Heights</h2>
-      <p>Essien's Excellence Academy provides Christ-centered education that develops the next generation of leaders through academic excellence and character development.</p>
-      <a href="admissions.html" class="btn">Apply Now</a>
-    </div>
-  </section>
-
-  <!-- Features Section -->
-  <section class="container">
-    <div class="features">
-      <div class="feature-card glass-effect">
-        <div class="feature-icon">📚</div>
-        <h3>Academic Excellence</h3>
-        <p>Our curriculum is designed to challenge students and foster critical thinking skills from elementary through JHS.</p>
-      </div>
-      <div class="feature-card glass-effect">
-        <div class="feature-icon">✨</div>
-        <h3>Character Development</h3>
-        <p>We focus on developing Christlike behavior and values that will guide students throughout their lives.</p>
-      </div>
-      <div class="feature-card glass-effect">
-        <div class="feature-icon">🏀</div>
-        <h3>Extracurricular Activities</h3>
-        <p>From sports to arts, we offer diverse activities to help students discover and develop their talents.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Announcements Section -->
-  <section class="container">
-    <div class="announcements glass-effect">
-      <h2>Latest Announcements</h2>
-      <div class="announcement-item">
-        <h3>New School Year Registration</h3>
-        <p>Registration for the 2025-2026 academic year is now open. Limited spaces available.</p>
-        <small>Posted: September 12, 2025</small>
-      </div>
-      <div class="announcement-item">
-        <h3>Parent-Teacher Conference</h3>
-        <p>The next parent-teacher conference will be held on September 30, 2025. Please schedule your appointment.</p>
-        <small>Posted: September 10, 2025</small>
-      </div>
-      <div class="announcement-item">
-        <h3>Science Fair Winners</h3>
-        <p>Congratulations to our students who won first place in the regional science fair competition.</p>
-        <small>Posted: September 5, 2025</small>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer>
-    <div class="container">
-      <div class="footer-content">
-        <div class="footer-section">
-          <h3>Contact Us</h3>
-          <p>Email: info@essienacademy.edu.gh</p>
-          <p>Phone: +233 XX XXX XXXX</p>
-          <p>Address: Education Street, Academic City, Ghana</p>
+    <!-- Header -->
+    <header class="glass-effect">
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">
+                    <div class="logo-img">EEA</div>
+                    <div class="logo-text">
+                        <div class="logo-school">ESSIEN'S EXCELLENCE ACADEMY</div>
+                        <div class="logo-motto">REST NOT, ASPIRE TO GREATER HEIGHT</div>
+                    </div>
+                </a>
+                <div class="menu-toggle" id="mobile-menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <nav id="main-nav">
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="academics.html">Academics</a></li>
+                        <li><a href="admissions.html">Admissions</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
         </div>
-        <div class="footer-section">
-          <h3>Quick Links</h3>
-          <a href="admissions.html">Admissions</a>
-          <a href="academics.html">Academic Calendar</a>
-          <a href="about.html">School Policies</a>
-          <a href="contact.html">Lunch Menu</a>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h2>Rest Not; Aspire to Greater Heights</h2>
+            <p>Essien's Excellence Academy provides Christ-centered education that develops the next generation of leaders through academic excellence and character development.</p>
+            <a href="admissions.html" class="btn">Apply Now</a>
         </div>
-        <div class="footer-section">
-          <h3>Follow Us</h3>
-          <a href="#">Facebook</a>
-          <a href="#">Instagram</a>
-          <a href="#">Twitter</a>
-          <a href="#">YouTube</a>
+    </section>
+
+    <!-- Features Section -->
+    <section class="container">
+        <div class="features">
+            <div class="feature-card glass-effect">
+                <div class="feature-icon">📚</div>
+                <h3>Academic Excellence</h3>
+                <p>Our curriculum is designed to challenge students and foster critical thinking skills from elementary through JHS.</p>
+            </div>
+            <div class="feature-card glass-effect">
+                <div class="feature-icon">✨</div>
+                <h3>Character Development</h3>
+                <p>We focus on developing Christlike behavior and values that will guide students throughout their lives.</p>
+            </div>
+            <div class="feature-card glass-effect">
+                <div class="feature-icon">🏀</div>
+                <h3>Extracurricular Activities</h3>
+                <p>From sports to arts, we offer diverse activities to help students discover and develop their talents.</p>
+            </div>
         </div>
-      </div>
-      <div class="copyright">
-        <p>&copy; 2025 Essien's Excellence Academy. All Rights Reserved.</p>
-      </div>
-    </div>
-  </footer>
+    </section>
 
-  <script>
-    // Interactive background effect
-    document.addEventListener('mousemove', (e) => {
-      const circles = document.querySelectorAll('.animated-circle');
-      const x = e.clientX / window.innerWidth;
-      const y = e.clientY / window.innerHeight;
+    <!-- Announcements Section -->
+    <section class="container">
+        <div class="announcements glass-effect">
+            <h2>Latest Announcements</h2>
+            <div class="announcement-item">
+                <h3>New School Year Registration</h3>
+                <p>Registration for the 2025-2026 academic year is now open. Limited spaces available.</p>
+                <small>Posted: September 12, 2025</small>
+            </div>
+            <div class="announcement-item">
+                <h3>Parent-Teacher Conference</h3>
+                <p>The next parent-teacher conference will be held on September 30, 2025. Please schedule your appointment.</p>
+                <small>Posted: September 10, 2025</small>
+            </div>
+            <div class="announcement-item">
+                <h3>Science Fair Winners</h3>
+                <p>Congratulations to our students who won first place in the regional science fair competition.</p>
+                <small>Posted: September 5, 2025</small>
+            </div>
+        </div>
+    </section>
 
-      circles.forEach((circle, index) => {
-        const speed = 0.01 * (index + 1);
-        const xOffset = (x - 0.5) * speed * 100;
-        const yOffset = (y - 0.5) * speed * 100;
-        circle.style.transform = `translate(${xOffset}px, ${yOffset}px)`;
-      });
-    });
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p>Email: info@essienacademy.edu.gh</p>
+                    <p>Phone: +233 XX XXX XXXX</p>
+                    <p>Address: Education Street, Academic City, Ghana</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <a href="admissions.html">Admissions</a>
+                    <a href="academics.html">Academic Calendar</a>
+                    <a href="about.html">School Policies</a>
+                    <a href="contact.html">Lunch Menu</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Follow Us</h3>
+                    <a href="#">Facebook</a>
+                    <a href="#">Instagram</a>
+                    <a href="#">Twitter</a>
+                    <a href="#">YouTube</a>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Essien's Excellence Academy. All Rights Reserved.</p>
+            </div>
+            <div style="text-align: center; margin-top: 20px; font-size: 0.9rem; color: #ccc;">
+                <p>Replace the logo placeholder with: <code>&lt;img src="https://essienacademy.github.io/logo.png" alt="Essien's Excellence Academy Logo" class="site-logo"&gt;</code></p>
+            </div>
+        </div>
+    </footer>
 
-    // Mobile menu toggle
-    const mobileMenu = document.getElementById('mobile-menu');
-    const mainNav = document.getElementById('main-nav');
-    
-    mobileMenu.addEventListener('click', function() {
-      mainNav.classList.toggle('active');
-      mobileMenu.classList.toggle('active');
-    });
-  </script>
+    <script>
+        // Interactive background effect
+        document.addEventListener('mousemove', (e) => {
+            const circles = document.querySelectorAll('.animated-circle');
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+
+            circles.forEach((circle, index) => {
+                const speed = 0.01 * (index + 1);
+                const xOffset = (x - 0.5) * speed * 100;
+                const yOffset = (y - 0.5) * speed * 100;
+                circle.style.transform = `translate(${xOffset}px, ${yOffset}px)`;
+            });
+        });
+
+        // Mobile menu toggle
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mainNav = document.getElementById('main-nav');
+        
+        mobileMenu.addEventListener('click', function() {
+            mainNav.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+        });
+    </script>
 </body>
 </html>
