@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Essien's Excellence Academy</title>
-  <link rel="icon" href="https://essienacademy.github.io/logo.png" type="image/png">
+  <link rel="icon" type="image/png" href="https://essienacademy.github.io/logo.png">
   <style>
     :root {
       --primary: #000000;
@@ -66,52 +66,18 @@
     .logo {
       display: flex;
       align-items: center;
-      text-decoration: none;
-      color: inherit;
     }
 
-    .logo-container {
-      display: flex;
-      align-items: center;
-    }
-
-    .logo-img {
-      width: 70px;
-      height: 70px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    .site-logo {
+      width: 60px;
+      height: auto;
+      border-radius: 8px;
       margin-right: 15px;
-      border-radius: 50%;
-      overflow: hidden;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-      border: 2px solid var(--accent);
     }
 
-    .logo-img img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .logo-text {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .logo-school {
-      font-weight: bold;
-      font-size: 1.4rem;
-      line-height: 1.2;
-      color: var(--accent);
-    }
-
-    .logo-motto {
-      font-size: 0.8rem;
-      font-style: italic;
-      color: var(--accent2);
-      line-height: 1.1;
-      margin-top: 2px;
+    .logo h1 {
+      font-size: 1.8rem;
+      font-weight: 700;
     }
 
     nav ul {
@@ -341,12 +307,8 @@
         padding: 15px;
       }
       
-      .logo-school {
-        font-size: 1.1rem;
-      }
-      
-      .logo-motto {
-        font-size: 0.65rem;
+      .logo h1 {
+        font-size: 1.5rem;
       }
       
       nav {
@@ -413,6 +375,9 @@
       .feature-card {
         padding: 20px;
         text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
       }
       
       .feature-icon {
@@ -470,17 +435,12 @@
         font-size: 1.8rem;
       }
       
-      .logo-school {
-        font-size: 1rem;
+      .logo h1 {
+        font-size: 1.3rem;
       }
       
-      .logo-motto {
-        font-size: 0.6rem;
-      }
-      
-      .logo-img {
-        width: 60px;
-        height: 60px;
+      .site-logo {
+        width: 50px;
       }
       
       .feature-icon {
@@ -505,17 +465,10 @@
   <header class="glass-effect">
     <div class="container">
       <div class="header-content">
-        <a href="index.html" class="logo">
-          <div class="logo-container">
-            <div class="logo-img">
-              <img src="https://essienacademy.github.io/logo.png" alt="Essien's Excellence Academy Logo">
-            </div>
-            <div class="logo-text">
-              <div class="logo-school">ESSIEN'S EXCELLENCE ACADEMY</div>
-              <div class="logo-motto">REST NOT, ASPIRE TO GREATER HEIGHT</div>
-            </div>
-          </div>
-        </a>
+        <div class="logo">
+          <img src="https://essienacademy.github.io/logo.png" alt="Essien's Excellence Academy Logo" class="site-logo">
+          <h1>Essien's Excellence Academy</h1>
+        </div>
         <div class="menu-toggle" id="mobile-menu">
           <span></span>
           <span></span>
