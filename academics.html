@@ -74,16 +74,11 @@
             font-weight: 700;
         }
         
-        .logo-placeholder {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: var(--accent);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            font-size: 1.2rem;
+        /* Site Logo Styles - Made larger */
+        .site-logo {
+            width: 90px; /* Increased from 80px */
+            height: auto;
+            border-radius: 8px;
         }
         
         nav ul {
@@ -592,6 +587,11 @@
                 margin-left: 10px;
             }
             
+            /* Site Logo on Mobile - Made larger */
+            .site-logo {
+                width: 70px; /* Increased from 64px */
+            }
+            
             nav {
                 width: 100%;
                 margin-top: 15px;
@@ -805,12 +805,6 @@
                 font-size: 1.3rem;
             }
             
-            .logo-placeholder {
-                width: 40px;
-                height: 40px;
-                font-size: 1rem;
-            }
-            
             .programs h3, .curriculum h3, .resources h3, .calendar h3 {
                 font-size: 1.4rem;
             }
@@ -843,7 +837,8 @@
         <div class="container">
             <div class="header-content">
                 <div class="logo">
-                    <div class="logo-placeholder">EEA</div>
+                    <!-- Real logo inserted here -->
+                    <img src="logo.png" alt="Essien's Excellence Academy Logo" class="site-logo">
                     <h1>Essien's Excellence Academy</h1>
                 </div>
                 <div class="menu-toggle" id="mobile-menu">
