@@ -124,11 +124,21 @@
       transition: all 0.3s ease;
     }
 
-    /* Hero Section */
+    /* Hero Section with Fade-In Effect */
     .hero {
       padding: 80px 0;
       text-align: center;
       margin: 40px 0;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 1.2s ease-out forwards;
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .hero h2 {
@@ -138,6 +148,8 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       font-weight: 800;
+      opacity: 0;
+      animation: fadeInText 1s ease-out 0.3s forwards;
     }
 
     .hero p {
@@ -145,6 +157,8 @@
       max-width: 700px;
       margin: 0 auto 30px;
       line-height: 1.6;
+      opacity: 0;
+      animation: fadeInText 1s ease-out 0.6s forwards;
     }
 
     .btn {
@@ -158,6 +172,14 @@
       transition: all 0.3s ease;
       border: none;
       cursor: pointer;
+      opacity: 0;
+      animation: fadeInText 1s ease-out 0.9s forwards;
+    }
+
+    @keyframes fadeInText {
+      to {
+        opacity: 1;
+      }
     }
 
     .btn:hover {
@@ -177,7 +199,17 @@
       padding: 30px;
       transition: all 0.3s ease;
       height: 100%;
+      opacity: 0;
+      transform: translateY(30px);
     }
+
+    .feature-card.animate {
+      animation: fadeInUp 0.8s ease-out forwards;
+    }
+
+    .feature-card:nth-child(1) { animation-delay: 0.2s; }
+    .feature-card:nth-child(2) { animation-delay: 0.4s; }
+    .feature-card:nth-child(3) { animation-delay: 0.6s; }
 
     .feature-card:hover {
       transform: translateY(-10px);
@@ -198,6 +230,9 @@
     .announcements {
       padding: 40px;
       margin: 60px 0;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 1s ease-out 1.2s forwards;
     }
 
     .announcements h2 {
@@ -210,6 +245,23 @@
       padding: 20px;
       margin-bottom: 20px;
       border-left: 4px solid var(--accent);
+      opacity: 0;
+      transform: translateX(-20px);
+    }
+
+    .announcement-item.animate {
+      animation: slideInRight 0.8s ease-out forwards;
+    }
+
+    .announcement-item:nth-child(1) { animation-delay: 1.4s; }
+    .announcement-item:nth-child(2) { animation-delay: 1.6s; }
+    .announcement-item:nth-child(3) { animation-delay: 1.8s; }
+
+    @keyframes slideInRight {
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
     }
 
     .announcement-item h3 {
@@ -597,6 +649,32 @@
     mobileMenu.addEventListener('click', function() {
       mainNav.classList.toggle('active');
       mobileMenu.classList.toggle('active');
+    });
+
+    // Animation trigger on scroll
+    document.addEventListener('DOMContentLoaded', function() {
+      // Feature cards animation
+      const featureCards = document.querySelectorAll('.feature-card');
+      const announcementItems = document.querySelectorAll('.announcement-item');
+      
+      // Create an Intersection Observer to trigger animations when elements come into view
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate');
+          }
+        });
+      }, { threshold: 0.1 });
+      
+      // Observe feature cards
+      featureCards.forEach(card => {
+        observer.observe(card);
+      });
+      
+      // Observe announcement items
+      announcementItems.forEach(item => {
+        observer.observe(item);
+      });
     });
   </script>
 </body>
