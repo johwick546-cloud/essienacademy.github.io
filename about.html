@@ -257,8 +257,14 @@
             border-radius: 50%;
             top: 20px;
             z-index: 1;
-            left: 50%;
-            margin-left: -10px; /* This ensures the circle is centered on the line */
+        }
+        
+        .timeline-item:nth-child(odd)::after {
+            right: -10px;
+        }
+        
+        .timeline-item:nth-child(even)::after {
+            left: -10px;
         }
         
         /* Staff Section */
@@ -527,8 +533,10 @@
                 text-align: left;
             }
             
-            .timeline-item::after {
+            .timeline-item:nth-child(odd)::after, 
+            .timeline-item:nth-child(even)::after {
                 left: 21px;
+                right: auto;
             }
             
             .timeline-content {
