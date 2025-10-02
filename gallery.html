@@ -1,0 +1,1061 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery - Essien's Excellence Academy</title>
+    <!-- Favicon -->
+    <link rel="icon" href="logo.png" type="image/png">
+    <link rel="shortcut icon" href="logo.png" type="image/png">
+    <!-- Google Search Console Verification -->
+    <meta name="google-site-verification" content="RuFJnRvLw_Ca8e8r36sBcByIurnVPUOPLVLIZPkJgHU" />
+    <style>
+        :root {
+            --primary: #000000;
+            --secondary: #FFFFFF;
+            --accent: #1E90FF;
+            --accent2: #FF8C00;
+            --glass: rgba(255, 255, 255, 0.1);
+            --glass-dark: rgba(0, 0, 0, 0.1);
+            --shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            --border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #000428, #004e92);
+            color: var(--secondary);
+            min-height: 100vh;
+            background-attachment: fixed;
+            overflow-x: hidden;
+        }
+        
+        .glass-effect {
+            background: var(--glass);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-radius: 12px;
+            border: var(--border);
+            box-shadow: var(--shadow);
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header Styles */
+        header {
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 25px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo h1 {
+            font-size: 1.8rem;
+            margin-left: 15px;
+            font-weight: 700;
+        }
+        
+        /* Site Logo Styles - Made larger */
+        .site-logo {
+            width: 90px; /* Increased from 80px */
+            height: auto;
+            border-radius: 8px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 25px;
+        }
+        
+        nav ul li a {
+            color: var(--secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 8px 15px;
+            border-radius: 20px;
+        }
+        
+        nav ul li a:hover {
+            color: var(--accent);
+            background: var(--glass-dark);
+        }
+
+        /* Mobile Navigation */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: space-around;
+            width: 30px;
+            height: 25px;
+            cursor: pointer;
+        }
+
+        .menu-toggle span {
+            width: 100%;
+            height: 3px;
+            background-color: var(--secondary);
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        /* Page Title */
+        .page-title {
+            text-align: center;
+            padding: 60px 0 30px;
+        }
+        
+        .page-title h2 {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            background: linear-gradient(45deg, var(--accent), var(--accent2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 800;
+        }
+        
+        .page-title p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+        
+        /* Gallery Section */
+        .gallery {
+            padding: 50px 0;
+        }
+        
+        .gallery-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        
+        .category-card {
+            padding: 25px;
+            transition: all 0.3s ease;
+        }
+        
+        .category-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .category-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .category-icon {
+            font-size: 1.8rem;
+            margin-right: 15px;
+            color: var(--accent);
+        }
+        
+        .category-title {
+            font-size: 1.5rem;
+            color: var(--accent2);
+        }
+        
+        /* Slideshow Styles */
+        .slideshow-container {
+            position: relative;
+            height: 300px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .slideshow {
+            position: relative;
+            height: 100%;
+            width: 100%;
+        }
+        
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.8s ease-in-out;
+            background-size: cover;
+            background-position: center;
+            border-radius: 8px;
+        }
+        
+        .slide.active {
+            opacity: 1;
+        }
+        
+        .slide-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 15px;
+            color: white;
+            border-radius: 0 0 8px 8px;
+        }
+        
+        .slide-title {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+        
+        .slide-description {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        /* Slideshow Navigation */
+        .slideshow-nav {
+            display: flex;
+            justify-content: center;
+            margin-top: 15px;
+        }
+        
+        .nav-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            margin: 0 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-dot.active {
+            background: var(--accent);
+            transform: scale(1.2);
+        }
+        
+        .nav-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+        
+        .nav-arrow:hover {
+            background: rgba(0, 0, 0, 0.7);
+        }
+        
+        .prev {
+            left: 10px;
+        }
+        
+        .next {
+            right: 10px;
+        }
+        
+        /* Lightbox Styles */
+        .lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .lightbox.active {
+            display: flex;
+            opacity: 1;
+        }
+        
+        .lightbox-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .lightbox-img {
+            max-width: 100%;
+            max-height: 80vh;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+        
+        .lightbox-caption {
+            margin-top: 15px;
+            color: white;
+            text-align: center;
+            max-width: 600px;
+        }
+        
+        .lightbox-close {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .lightbox-nav:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        .lightbox-prev {
+            left: 20px;
+        }
+        
+        .lightbox-next {
+            right: 20px;
+        }
+        
+        /* Footer */
+        footer {
+            padding: 40px 0;
+            margin-top: 60px;
+            text-align: center;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            text-align: left;
+        }
+        
+        .footer-section h3 {
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+        }
+        
+        .footer-section p, .footer-section a {
+            margin-bottom: 10px;
+            display: block;
+            color: #ccc;
+            text-decoration: none;
+        }
+        
+        .footer-section a:hover {
+            color: var(--accent);
+        }
+        
+        .copyright {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Interactive Background */
+        .background-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.5;
+        }
+        
+        .animated-circle {
+            position: absolute;
+            border-radius: 50%;
+            background: linear-gradient(45deg, var(--accent), var(--accent2));
+            opacity: 0.3;
+            filter: blur(40px);
+            animation: float 15s infinite linear;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+            50% {
+                transform: translate(20px, 20px) rotate(180deg);
+            }
+            100% {
+                transform: translate(0, 0) rotate(360deg);
+            }
+        }
+
+        /* =========================== */
+        /* RESPONSIVE MEDIA QUERIES */
+        /* =========================== */
+        
+        /* Tablet (768px–1023px) */
+        @media (max-width: 1023px) {
+            .page-title h2 {
+                font-size: 2.5rem;
+            }
+            
+            .gallery {
+                padding: 40px 0;
+            }
+            
+            .gallery-categories {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 25px;
+            }
+            
+            .category-card {
+                padding: 20px;
+            }
+            
+            .slideshow-container {
+                height: 250px;
+            }
+            
+            .footer-content {
+                gap: 20px;
+            }
+        }
+        
+        /* Mobile (≤767px) */
+        @media (max-width: 767px) {
+            /* Header and Navigation */
+            .header-content {
+                flex-direction: column;
+                padding: 15px;
+            }
+            
+            .logo h1 {
+                font-size: 1.5rem;
+                margin-left: 10px;
+            }
+            
+            /* Site Logo on Mobile - Made larger */
+            .site-logo {
+                width: 70px; /* Increased from 64px */
+            }
+            
+            nav {
+                width: 100%;
+                margin-top: 15px;
+                display: none;
+            }
+            
+            nav.active {
+                display: block;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav ul li {
+                margin: 8px 0;
+                width: 100%;
+                text-align: center;
+            }
+            
+            nav ul li a {
+                display: block;
+                padding: 12px;
+                border-radius: 8px;
+            }
+            
+            .menu-toggle {
+                display: flex;
+                position: absolute;
+                top: 30px;
+                right: 20px;
+            }
+            
+            /* Page Title */
+            .page-title {
+                padding: 50px 0 20px;
+            }
+            
+            .page-title h2 {
+                font-size: 2rem;
+            }
+            
+            .page-title p {
+                font-size: 1.1rem;
+                padding: 0 15px;
+            }
+            
+            /* Gallery Section */
+            .gallery {
+                padding: 30px 0;
+            }
+            
+            .gallery-categories {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .category-card {
+                padding: 20px;
+            }
+            
+            .category-title {
+                font-size: 1.3rem;
+            }
+            
+            .slideshow-container {
+                height: 220px;
+            }
+            
+            .nav-arrow {
+                width: 35px;
+                height: 35px;
+                font-size: 1rem;
+            }
+            
+            /* Lightbox */
+            .lightbox-nav {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+            
+            .lightbox-prev {
+                left: 10px;
+            }
+            
+            .lightbox-next {
+                right: 10px;
+            }
+            
+            /* Footer */
+            footer {
+                padding: 30px 0;
+                margin-top: 40px;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 25px;
+                text-align: center;
+            }
+            
+            .footer-section h3 {
+                font-size: 1.2rem;
+            }
+            
+            .copyright {
+                margin-top: 30px;
+            }
+            
+            /* Container padding adjustment */
+            .container {
+                padding: 0 15px;
+            }
+        }
+        
+        /* Small Mobile (≤480px) */
+        @media (max-width: 480px) {
+            .page-title h2 {
+                font-size: 1.8rem;
+            }
+            
+            .logo h1 {
+                font-size: 1.3rem;
+            }
+            
+            .category-title {
+                font-size: 1.2rem;
+            }
+            
+            .slideshow-container {
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Interactive Background -->
+    <div class="background-animation">
+        <div class="animated-circle" style="width: 300px; height: 300px; top: 10%; left: 20%;"></div>
+        <div class="animated-circle" style="width: 200px; height: 200px; top: 60%; left: 70%; animation-delay: -5s;"></div>
+        <div class="animated-circle" style="width: 250px; height: 250px; top: 30%; left: 50%; animation-delay: -10s;"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="glass-effect">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <!-- Real logo inserted here -->
+                    <img src="logo.png" alt="Essien's Excellence Academy Logo" class="site-logo">
+                    <h1>Essien's Excellence Academy</h1>
+                </div>
+                <div class="menu-toggle" id="mobile-menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <nav id="main-nav">
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="academics.html">Academics</a></li>
+                        <li><a href="admissions.html">Admissions</a></li>
+                        <li><a href="gallery.html" style="color: var(--accent); background: var(--glass-dark);">Gallery</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Title -->
+    <section class="page-title">
+        <div class="container">
+            <h2>Our Gallery</h2>
+            <p>Explore the vibrant life and activities at Essien's Excellence Academy</p>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section class="gallery">
+        <div class="container">
+            <div class="gallery-categories">
+                <!-- Education Category -->
+                <div class="category-card glass-effect">
+                    <div class="category-header">
+                        <div class="category-icon">📚</div>
+                        <h3 class="category-title">Education & Learning</h3>
+                    </div>
+                    <div class="slideshow-container">
+                        <div class="slideshow" id="education-slideshow">
+                            <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1497636577773-f1231844b336?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');">
+                                <div class="slide-content">
+                                    <h4 class="slide-title">Classroom Learning</h4>
+                                    <p class="slide-description">Students engaged in interactive classroom activities</p>
+                                </div>
+                            </div>
+                            <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1503676260728-1c00da094a0b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');">
+                                <div class="slide-content">
+                                    <h4 class="slide-title">Science Laboratory</h4>
+                                    <p class="slide-description">Hands-on experiments in our modern science lab</p>
+                                </div>
+                            </div>
+                            <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');">
+                                <div class="slide-content">
+                                    <h4 class="slide-title">Graduation Ceremony</h4>
+                                    <p class="slide-description">Celebrating academic achievements</p>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="nav-arrow prev" onclick="changeSlide('education', -1)">&#10094;</button>
+                        <button class="nav-arrow next" onclick="changeSlide('education', 1)">&#10095;</button>
+                    </div>
+                    <div class="slideshow-nav" id="education-nav">
+                        <span class="nav-dot active" onclick="goToSlide('education', 0)"></span>
+                        <span class="nav-dot" onclick="goToSlide('education', 1)"></span>
+                        <span class="nav-dot" onclick="goToSlide('education', 2)"></span>
+                    </div>
+                </div>
+
+                <!-- Computing Lab Category -->
+                <div class="category-card glass-effect">
+                    <div class="category-header">
+                        <div class="category-icon">💻</div>
+                        <h3 class="category-title">Computing Lab</h3>
+                    </div>
+                    <div class="slideshow-container">
+                        <div class="slideshow" id="computing-slideshow">
+                            <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1518709268805-4e9042af2176?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');">
+                                <div class="slide-content">
+                                    <h4 class="slide-title">Modern Computer Lab</h4>
+                                    <p class="slide-description">State-of-the-art technology for digital learning</p>
+                                </div>
+                            </div>
+                            <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');">
+                                <div class="slide-content">
+                                    <h4 class="slide-title">Coding Workshop</h4>
+                                    <p class="slide-description">Students learning programming skills</p>
+                                </div>
+                            </div>
+                            <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1542831371-29b0f74f9713?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');">
+                                <div class="slide-content">
+                                    <h4 class="slide-title">Digital Literacy</h4>
+                                    <p class="slide-description">Developing essential technology skills</p>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="nav-arrow prev" onclick="changeSlide('computing', -1)">&#10094;</button>
+                        <button class="nav-arrow next" onclick="changeSlide('computing', 1)">&#10095;</button>
+                    </div>
+                    <div class="slideshow-nav" id="computing-nav">
+                        <span class="nav-dot active" onclick="goToSlide('computing', 0)"></span>
+                        <span class="nav-dot" onclick="goToSlide('computing', 1)"></span>
+                        <span class="nav-dot" onclick="goToSlide('computing', 2)"></span>
+                    </div>
+                </div>
+
+                <!-- Events Category -->
+                <div class="category-card glass-effect">
+                    <div class="category-header">
+                        <div class="category-icon">🎉</div>
+                        <h3 class="category-title">School Events</h3>
+                    </div>
+                    <div class="slideshow-container">
+                        <div class="slideshow" id="events-slideshow">
+                            <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1540575467063-178a50c2df87?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');">
+                                <div class="slide-content">
+                                    <h4 class="slide-title">Cultural Day</h4>
+                                    <p class="slide-description">Celebrating diversity and traditions</p>
+                                </div>
+                            </div>
+                            <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');">
+                                <div class="slide-content">
+                                    <h4 class="slide-title">Science Fair</h4>
+                                    <p class="slide-description">Showcasing student innovations</p>
+                                </div>
+                            </div>
+                            <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');">
+                                <div class="slide-content">
+                                    <h4 class="slide-title">Awards Ceremony</h4>
+                                    <p class="slide-description">Recognizing student achievements</p>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="nav-arrow prev" onclick="changeSlide('events', -1)">&#10094;</button>
+                        <button class="nav-arrow next" onclick="changeSlide('events', 1)">&#10095;</button>
+                    </div>
+                    <div class="slideshow-nav" id="events-nav">
+                        <span class="nav-dot active" onclick="goToSlide('events', 0)"></span>
+                        <span class="nav-dot" onclick="goToSlide('events', 1)"></span>
+                        <span class="nav-dot" onclick="goToSlide('events', 2)"></span>
+                    </div>
+                </div>
+
+                <!-- Sports Category -->
+                <div class="category-card glass-effect">
+                    <div class="category-header">
+                        <div class="category-icon">⚽</div>
+                        <h3 class="category-title">Sports & Athletics</h3>
+                    </div>
+                    <div class="slideshow-container">
+                        <div class="slideshow" id="sports-slideshow">
+                            <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');">
+                                <div class="slide-content">
+                                    <h4 class="slide-title">Football Team</h4>
+                                    <p class="slide-description">Our championship-winning football team</p>
+                                </div>
+                            </div>
+                            <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1546519638-68e109498ffc?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');">
+                                <div class="slide-content">
+                                    <h4 class="slide-title">Basketball Practice</h4>
+                                    <p class="slide-description">Developing skills and teamwork</p>
+                                </div>
+                            </div>
+                            <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1461896836934-ffe607ba8211?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');">
+                                <div class="slide-content">
+                                    <h4 class="slide-title">Sports Day</h4>
+                                    <p class="slide-description">Annual inter-house competitions</p>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="nav-arrow prev" onclick="changeSlide('sports', -1)">&#10094;</button>
+                        <button class="nav-arrow next" onclick="changeSlide('sports', 1)">&#10095;</button>
+                    </div>
+                    <div class="slideshow-nav" id="sports-nav">
+                        <span class="nav-dot active" onclick="goToSlide('sports', 0)"></span>
+                        <span class="nav-dot" onclick="goToSlide('sports', 1)"></span>
+                        <span class="nav-dot" onclick="goToSlide('sports', 2)"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox">
+        <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+        <button class="lightbox-nav lightbox-prev" onclick="changeLightboxSlide(-1)">&#10094;</button>
+        <button class="lightbox-nav lightbox-next" onclick="changeLightboxSlide(1)">&#10095;</button>
+        <div class="lightbox-content">
+            <img class="lightbox-img" id="lightbox-img" src="" alt="">
+            <div class="lightbox-caption" id="lightbox-caption"></div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <p>Email: info@essienacademy.edu.gh</p>
+                    <p>Phone: +233 24 260 1747</p>
+                    <p>Address: Adjuah Street, Takoradi, Ghana</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <a href="admissions.html">Admissions</a>
+                    <a href="academics.html">Academic Calendar</a>
+                    <a href="about.html">School Policies</a>
+                    <a href="contact.html">Lunch Menu</a>
+                </div>
+                <div class="footer-section">
+                    <h3>Follow Us</h3>
+                    <a href="#">Facebook</a>
+                    <a href="#">Instagram</a>
+                    <a href="#">WhatsApp</a>
+                    <a href="#">YouTube</a>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Essien's Excellence Academy. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mainNav = document.getElementById('main-nav');
+        
+        mobileMenu.addEventListener('click', function() {
+            mainNav.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+        });
+
+        // Interactive background effect
+        document.addEventListener('mousemove', (e) => {
+            const circles = document.querySelectorAll('.animated-circle');
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
+            
+            circles.forEach((circle, index) => {
+                const speed = 0.01 * (index + 1);
+                const xOffset = (x - 0.5) * speed * 100;
+                const yOffset = (y - 0.5) * speed * 100;
+                
+                circle.style.transform = `translate(${xOffset}px, ${yOffset}px)`;
+            });
+        });
+
+        // Gallery Slideshow Functionality
+        const categories = ['education', 'computing', 'events', 'sports'];
+        const slideTimers = {};
+        
+        // Initialize all slideshows
+        categories.forEach(category => {
+            initializeSlideshow(category);
+        });
+        
+        function initializeSlideshow(category) {
+            const slideshow = document.getElementById(`${category}-slideshow`);
+            const slides = slideshow.querySelectorAll('.slide');
+            const navDots = document.getElementById(`${category}-nav`).querySelectorAll('.nav-dot');
+            
+            // Set initial active slide
+            let currentSlide = 0;
+            
+            // Start automatic slideshow
+            slideTimers[category] = setInterval(() => {
+                changeSlide(category, 1);
+            }, 4000); // Change slide every 4 seconds
+            
+            // Add click event to open lightbox when slide is clicked
+            slides.forEach((slide, index) => {
+                slide.addEventListener('click', () => {
+                    openLightbox(category, index);
+                });
+            });
+        }
+        
+        function changeSlide(category, direction) {
+            const slideshow = document.getElementById(`${category}-slideshow`);
+            const slides = slideshow.querySelectorAll('.slide');
+            const navDots = document.getElementById(`${category}-nav`).querySelectorAll('.nav-dot');
+            
+            let currentSlide = 0;
+            slides.forEach((slide, index) => {
+                if (slide.classList.contains('active')) {
+                    currentSlide = index;
+                }
+            });
+            
+            // Calculate new slide index
+            let newSlide = currentSlide + direction;
+            if (newSlide < 0) {
+                newSlide = slides.length - 1;
+            } else if (newSlide >= slides.length) {
+                newSlide = 0;
+            }
+            
+            // Update active slide
+            slides[currentSlide].classList.remove('active');
+            slides[newSlide].classList.add('active');
+            
+            // Update navigation dots
+            navDots[currentSlide].classList.remove('active');
+            navDots[newSlide].classList.add('active');
+            
+            // Reset timer for this category
+            clearInterval(slideTimers[category]);
+            slideTimers[category] = setInterval(() => {
+                changeSlide(category, 1);
+            }, 4000);
+        }
+        
+        function goToSlide(category, slideIndex) {
+            const slideshow = document.getElementById(`${category}-slideshow`);
+            const slides = slideshow.querySelectorAll('.slide');
+            const navDots = document.getElementById(`${category}-nav`).querySelectorAll('.nav-dot');
+            
+            // Remove active class from all slides and dots
+            slides.forEach(slide => slide.classList.remove('active'));
+            navDots.forEach(dot => dot.classList.remove('active'));
+            
+            // Add active class to selected slide and dot
+            slides[slideIndex].classList.add('active');
+            navDots[slideIndex].classList.add('active');
+            
+            // Reset timer for this category
+            clearInterval(slideTimers[category]);
+            slideTimers[category] = setInterval(() => {
+                changeSlide(category, 1);
+            }, 4000);
+        }
+        
+        // Lightbox Functionality
+        let currentLightboxCategory = '';
+        let currentLightboxSlide = 0;
+        
+        function openLightbox(category, slideIndex) {
+            currentLightboxCategory = category;
+            currentLightboxSlide = slideIndex;
+            
+            const slideshow = document.getElementById(`${category}-slideshow`);
+            const slides = slideshow.querySelectorAll('.slide');
+            const slide = slides[slideIndex];
+            const slideTitle = slide.querySelector('.slide-title').textContent;
+            const slideDescription = slide.querySelector('.slide-description').textContent;
+            const backgroundImage = slide.style.backgroundImage;
+            
+            // Extract image URL from background-image style
+            const imageUrl = backgroundImage.replace(/url\(['"]?(.*?)['"]?\)/i, '$1');
+            
+            // Set lightbox content
+            document.getElementById('lightbox-img').src = imageUrl;
+            document.getElementById('lightbox-caption').innerHTML = `<h3>${slideTitle}</h3><p>${slideDescription}</p>`;
+            
+            // Show lightbox
+            document.getElementById('lightbox').classList.add('active');
+            
+            // Prevent body scroll
+            document.body.style.overflow = 'hidden';
+        }
+        
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+        
+        function changeLightboxSlide(direction) {
+            const slideshow = document.getElementById(`${currentLightboxCategory}-slideshow`);
+            const slides = slideshow.querySelectorAll('.slide');
+            
+            // Calculate new slide index
+            let newSlide = currentLightboxSlide + direction;
+            if (newSlide < 0) {
+                newSlide = slides.length - 1;
+            } else if (newSlide >= slides.length) {
+                newSlide = 0;
+            }
+            
+            // Open the new slide in lightbox
+            openLightbox(currentLightboxCategory, newSlide);
+        }
+        
+        // Close lightbox when clicking outside the image
+        document.getElementById('lightbox').addEventListener('click', (e) => {
+            if (e.target.id === 'lightbox') {
+                closeLightbox();
+            }
+        });
+        
+        // Keyboard navigation for lightbox
+        document.addEventListener('keydown', (e) => {
+            if (document.getElementById('lightbox').classList.contains('active')) {
+                if (e.key === 'Escape') {
+                    closeLightbox();
+                } else if (e.key === 'ArrowLeft') {
+                    changeLightboxSlide(-1);
+                } else if (e.key === 'ArrowRight') {
+                    changeLightboxSlide(1);
+                }
+            }
+        });
+    </script>
+</body>
+</html>
